@@ -133,15 +133,15 @@ def demo(sess, net, image_name):
                 e=c
                 f=g
     if (e=='dr0'):
-        e='正常人dr0'
+        e='dr0'
     if (e=='dr1'):
-        e='轻度患者dr1'
+        e='dr1'
     if (e=='dr2'):
-        e='中度患者dr2'
+        e='dr2'
     if (e=='dr3'):
-        e='重度患者dr3'
+        e='dr3'
     if (e=='dr4'):
-        e='增殖患者dr4'
+        e='dr4'
     print(e,b)
     im = im[:, :, (2, 1, 0)]
     fig, ax = plt.subplots(figsize=(8, 6))
