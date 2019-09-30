@@ -13,5 +13,5 @@ You only need to type few words in the console to operate it.
 
 The shell script will help you to do everything: train,test, val,demo ,auto-image-loading and csv-txt result-saving.
 
-I am writing now.Just waiting
-#I am back now
+I am writing now.Just waiting  
+# I am back now
