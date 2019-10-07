@@ -55,6 +55,7 @@ Unzip it to ./output
   Download | Path 
   ------------- | ------------- 
   Baidu Yun | https://pan.baidu.com/s/1-zAgNRavUJGX5ggmSH-TEQ  Code: b4vt 
+  Google | https://drive.google.com/open?id=1iWMqZAX3wh-XN0o5pIGClvIx8wMPWWFT
 
 
 Pretrained Model
