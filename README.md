@@ -20,10 +20,25 @@ What is different from theirs?
 ![](https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students/blob/master/sampleImg/zh/004545.jpg)  
 
 ## Requirements
-System: Unix or Unix-Like Platrform (Have only tested on linux-ubuntu, other unix system should be supported in theory)
-Python3
-Tensorflow 1.8+
-OpenCV-Python
-CUDA
-CUDNN
-# I am back now
+System: Unix or Unix-Like Platrform  
+(Have only tested on linux-ubuntu, other unix system should be supported in theory)  
+Python3  
+Tensorflow 1.8+  
+OpenCV-Python  
+CUDA  
+CUDNN  
+##Usage
+Inference
+```
+    git clone https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students.git  
+    sh run.sh 
+```
+Train
+```
+    sh train.sh
+```
+Tensorboard viewer
+```
+    sh tensorboard.sh
+```
+## I am back now
