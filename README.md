@@ -29,9 +29,12 @@ CUDA
 CUDNN  
 
 ## Usage  
+You need to download weights first. See the following Models Download.
 Inference
 ```
     git clone https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students.git  
+    cd lib && make
+    cd ..
     sh run.sh 
 ```
 Train
@@ -44,9 +47,10 @@ Tensorboard viewer
 ```
 ## Dataset of Pascal Voc
 [Pascal Voc 2007+2012](https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students/tree/master/data/VOCdevkit2007/VOC2007)  
-Decode it to ./data/VOCdevkit2007/VOC2007
+Unzip it to ./data/VOCdevkit2007/VOC2007
 ## Models Download
 Main Model
+Unzip it to ./output
 
   Download | Path 
   ------------- | ------------- 
@@ -54,5 +58,10 @@ Main Model
 
 
 Pretrained Model
+Unzip it to ./data/imagenet_weights
 
-## I am back now
+  Download | Path 
+  ------------- | ------------- 
+  Baidu Yun | https://pan.baidu.com/s/1oSZMlwOaIFOuqrMeSIY-PQ  Code: qvos 
+
+## This is the first complete version. V1.0
