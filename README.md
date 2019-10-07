@@ -8,13 +8,17 @@ Thanks for auroua and endernewton's help.
 
 This code is for primary students to use.
 
-Very easy to use.
+What is different from theirs?
 
-You only need to type few words in the console to operate it.
+1. Support Python3 Train and Test
 
-The shell script will help you to do everything: train,test, val,demo ,auto-image-loading and csv-txt result-saving.
+2. Support Chinese Language of detecting result
 
-I am writing now.Just waiting 
+3. More easy to use and small changes
+
+![](https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students/blob/master/sampleImg/en/004545.jpg)  
+![](https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students/blob/master/sampleImg/zh/004545.jpg)  
+
 ## Requirements
 System: Unix or Unix-Like Platrform (Have only tested on linux-ubuntu, other unix system should be supported in theory)
 Python3
