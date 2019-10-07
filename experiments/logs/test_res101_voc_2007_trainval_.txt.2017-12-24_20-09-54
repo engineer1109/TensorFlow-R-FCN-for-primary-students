@@ -1,0 +1,1211 @@
++ echo Logging output to experiments/logs/test_res101_voc_2007_trainval_.txt.2017-12-24_20-09-54
+Logging output to experiments/logs/test_res101_voc_2007_trainval_.txt.2017-12-24_20-09-54
++ set +x
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb voc_2007_test --model output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt --cfg experiments/cfgs/res101.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101.yml', comp_mode=False, imdb_name='voc_2007_test', max_per_image=100, model='output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt', net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32],
+ 'CLASSES': 6,
+ 'DATA_DIR': '/home/wjl/tf_rfcn/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'res101',
+ 'FOCAL_LOSS': False,
+ 'GPU_ID': 0,
+ 'K': 3,
+ 'MATLAB': 'matlab',
+ 'PIXEL_MEANS': array([[[ 102.9801,  115.9465,  122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RESNET': {'BN_TRAIN': False, 'FIXED_BLOCKS': 1, 'MAX_POOL': False},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/wjl/tf_rfcn',
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 256,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 20,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'OHEM': False,
+           'OHEM_B': 128,
+           'OHEM_NMS_THRESH': 0.7,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'res101_faster_rcnn',
+           'STEPSIZE': 30000,
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True}
+2017-12-24 20:09:56.298916: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2017-12-24 20:09:56.516413: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.62
+pciBusID: 0000:03:00.0
+totalMemory: 10.91GiB freeMemory: 10.30GiB
+2017-12-24 20:09:56.516449: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:03:00.0, compute capability: 6.1)
+[<tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 54) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/biases:0' shape=(54,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 216) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/biases:0' shape=(216,) dtype=float32_ref>]
+Loading model check point from output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/weights
+rpn_network/resnet_v1_101/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/rpn_cls_score/weights
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/refined_classes/weights
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/rpn_cls_score/biases
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/rpn_conv/3x3/biases
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/refined_reduce_depth/weights
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/rpn_conv/3x3/weights
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/conv1/weights
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/refined_reduce_depth/biases
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/rpn_bbox_pred/biases
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/beta
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/refined_classes/biases
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/refined_bbox/weights
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/refined_bbox/biases
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/beta
+rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/beta
+rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean
+rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/gamma
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights
+rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/gamma
+rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/weights
+rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance
+rpn_network/resnet_v1_101/rpn_bbox_pred/weights
+rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_variance
+2017-12-24 20:10:09.021016: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.026772: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.027767: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.028649: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.028771: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.032764: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.035702: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.037344: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.038475: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.038836: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.039632: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.040204: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.040894: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.041230: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.041719: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.042664: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.043759: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.043979: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.044918: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.055180: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.055206: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.057005: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.058121: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.059064: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.059665: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.059727: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.060587: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.062766: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.063684: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.064226: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.064698: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.065340: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.066053: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.066432: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.067721: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.068330: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.068466: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.068732: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.069562: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.069638: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.070249: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.071006: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.071979: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.073148: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.075509: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.076032: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.076190: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.076393: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.078343: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.078416: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.079275: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.087507: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.088023: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.088112: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.089092: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.089304: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.089416: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.091289: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.091654: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.092166: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.092578: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.092836: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.093038: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.094664: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.094673: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.095196: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.095419: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.095786: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.097262: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.097292: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.101627: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.102197: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.102462: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.103438: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.104668: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.104923: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.105514: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.105996: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.107273: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.107335: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.107797: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.109251: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.110133: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.110310: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.110526: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.111803: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.111847: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.112318: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.112810: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.112839: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.115223: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.116294: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.117447: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.117906: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.118149: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.119004: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.119672: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.120633: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.120887: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.121324: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.122090: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.122976: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.123190: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.123751: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.124362: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.124575: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.125313: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.125418: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.125879: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.126978: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.127671: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.127985: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.128408: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.128845: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.129216: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.132642: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.133182: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.134514: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.134665: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.135395: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.136090: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.136935: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.137056: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.138922: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.138974: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.139127: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.139409: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.140420: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.141337: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.141744: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/refined_reduce_depth/biases not found in checkpoint
+2017-12-24 20:10:09.142103: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/refined_bbox/biases not found in checkpoint
+2017-12-24 20:10:09.143937: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.143991: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/refined_reduce_depth/weights not found in checkpoint
+2017-12-24 20:10:09.144198: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/refined_bbox/weights not found in checkpoint
+2017-12-24 20:10:09.148282: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/rpn_conv/3x3/biases not found in checkpoint
+2017-12-24 20:10:09.148420: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/rpn_cls_score/biases not found in checkpoint
+2017-12-24 20:10:09.148632: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/refined_classes/biases not found in checkpoint
+2017-12-24 20:10:09.149689: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/rpn_bbox_pred/weights not found in checkpoint
+2017-12-24 20:10:09.149752: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.150181: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/refined_classes/weights not found in checkpoint
+2017-12-24 20:10:09.150233: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/rpn_bbox_pred/biases not found in checkpoint
+2017-12-24 20:10:09.154291: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.155046: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/rpn_conv/3x3/weights not found in checkpoint
+2017-12-24 20:10:09.155595: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/rpn_cls_score/weights not found in checkpoint
+2017-12-24 20:10:09.156859: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.156915: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.157472: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.158110: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.158983: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.159690: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.166664: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.166903: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.167136: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.167516: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.167643: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.173384: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.173901: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.173938: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.174587: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.177233: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.177709: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.177793: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.177839: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/weights not found in checkpoint
+2017-12-24 20:10:09.178351: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.182255: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.189398: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.189459: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.190098: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.190440: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.190890: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.191441: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.192130: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.192418: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.193861: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.193868: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.196515: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.197303: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.197352: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.197514: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.197872: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.204851: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.205505: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.206088: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.206188: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.206301: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.206897: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.207135: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.207552: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.207688: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.207702: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.208068: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.208433: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.209581: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.209626: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.211104: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.213054: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.216168: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.216297: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.217742: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.217803: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.218313: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.219452: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.219703: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.220586: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.220817: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.221586: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.222519: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.222912: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.231788: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.232629: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.232671: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.232931: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.233256: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.233589: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.233638: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.233808: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.234702: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.234735: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.235204: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.235545: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.238721: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights not found in checkpoint
+2017-12-24 20:10:09.240283: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.246127: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.247460: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.247845: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.248447: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.248544: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.248619: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.248673: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.248733: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.249008: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.249200: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.250171: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.251642: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.253444: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.254051: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.255895: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.256287: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.256808: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.256893: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.257331: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.259517: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.259966: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.260961: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.263205: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.263461: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.263829: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.264245: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.264745: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.265488: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.266023: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.266330: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.267851: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.268831: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.268911: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.269327: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.269384: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.270139: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.270189: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.270409: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.278173: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.278196: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.278688: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.280168: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.281931: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.282275: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.282341: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.283440: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.284382: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.284795: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.285046: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.285142: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.285258: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.286543: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.287177: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.288705: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.288990: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.289268: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.291920: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.293610: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.294586: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.295149: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.295429: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.295674: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.295903: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.297684: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.298634: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.299315: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.299353: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.301004: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.301585: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.301632: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.303401: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.304176: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.305076: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights not found in checkpoint
+2017-12-24 20:10:09.305109: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.305595: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.305819: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.306039: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.306285: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.306359: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.310773: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.311419: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.311785: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.312343: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.314337: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.314932: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.315697: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.317342: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.320803: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.321086: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.321779: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.321885: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.322525: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.323032: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.323098: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.323472: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.323514: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.323934: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.323995: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.324337: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.326303: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.328660: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.328819: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.328916: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.329564: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.329681: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.330541: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.333081: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.333114: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.333504: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.337032: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.337572: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.338826: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.340532: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.340776: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.341036: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.341098: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.341882: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.342243: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.342813: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.343413: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.344868: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.345802: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.345908: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.346569: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.347196: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.348332: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.349247: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.349530: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.350436: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.351131: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.351327: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.351422: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.351655: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.352055: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.352889: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.353452: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.353832: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.354352: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.355139: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.355761: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.356328: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.356982: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.357506: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.358097: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.358976: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.360275: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.362299: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.362748: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.362803: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.363211: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.363384: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.364345: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.364373: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.364562: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.365344: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.367393: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.368120: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.368261: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.368964: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.369129: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.369529: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.369699: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.370237: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.370528: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.371260: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.373627: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.377352: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.377865: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.378200: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.378258: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.378749: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.378937: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.380452: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.381189: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.383016: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.383722: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.385709: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.386296: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.386918: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.388743: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.388819: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.389034: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.389092: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.389845: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.389878: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.390608: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.391229: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.392345: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.392880: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.393226: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.393673: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.394223: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.394486: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.395487: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.396407: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.397832: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.398141: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.398886: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.399060: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.399767: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.400619: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.401604: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.402023: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.402549: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.402885: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.402992: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.403797: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.405578: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.406681: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.407497: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.408406: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.408945: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.410844: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.411736: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.412722: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.412825: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.413189: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.413246: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.413722: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.414237: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.416219: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.417761: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.417821: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.418449: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.418918: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.419387: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.421879: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.422820: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.423800: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.424759: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.425976: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.426203: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.426251: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.426875: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.427877: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.428515: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.428969: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.429969: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.430317: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.430913: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.430996: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.431923: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.433395: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.434025: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.434495: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.435609: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.440426: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.440992: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.441254: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.441747: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.442127: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.442184: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.442805: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.444458: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.443285: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.444754: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.445565: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.446939: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.448275: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.449019: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.449829: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.450492: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.450715: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.450817: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.451208: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.451713: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.452028: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.453977: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.454369: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.454663: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.455474: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.455726: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.456127: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.457180: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.462176: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.462337: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.462182: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.462488: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.463030: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.464932: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.465368: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.466111: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.467068: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.467875: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights not found in checkpoint
+2017-12-24 20:10:09.468204: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.468940: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.469662: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.470091: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.471725: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.471908: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.472124: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.472235: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.473278: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights not found in checkpoint
+2017-12-24 20:10:09.474929: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.476341: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.477723: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.477917: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.479478: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.481076: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.481440: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights not found in checkpoint
+2017-12-24 20:10:09.481945: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.482533: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.483265: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.483978: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/gamma not found in checkpoint
+2017-12-24 20:10:09.484232: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.484405: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/beta not found in checkpoint
+2017-12-24 20:10:09.484597: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+2017-12-24 20:10:09.485270: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights not found in checkpoint
+2017-12-24 20:10:09.485703: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_mean not found in checkpoint
+2017-12-24 20:10:09.485875: W tensorflow/core/framework/op_kernel.cc:1192] Not found: Key rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/gamma not found in checkpoint
+Traceback (most recent call last):
+  File "./tools/test_net.py", line 131, in <module>
+    saver.restore(sess, args.model)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 1666, in restore
+    {self.saver_def.filename_tensor_name: save_path})
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 889, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 1120, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 1317, in _do_run
+    options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 1336, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.NotFoundError: Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+	 [[Node: save/RestoreV2_323 = RestoreV2[dtypes=[DT_FLOAT], _device="/job:localhost/replica:0/task:0/device:CPU:0"](_arg_save/Const_0_0, save/RestoreV2_323/tensor_names, save/RestoreV2_323/shape_and_slices)]]
+	 [[Node: save/RestoreV2_201/_411 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/device:GPU:0", send_device="/job:localhost/replica:0/task:0/device:CPU:0", send_device_incarnation=1, tensor_name="edge_1478_save/RestoreV2_201", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/device:GPU:0"]()]]
+
+Caused by op u'save/RestoreV2_323', defined at:
+  File "./tools/test_net.py", line 130, in <module>
+    saver = tf.train.Saver()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 1218, in __init__
+    self.build()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 1227, in build
+    self._build(self._filename, build_save=True, build_restore=True)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 1263, in _build
+    build_save=build_save, build_restore=build_restore)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 751, in _build_internal
+    restore_sequentially, reshape)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 427, in _AddRestoreOps
+    tensors = self.restore_op(filename_tensor, saveable, preferred_shard)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/saver.py", line 267, in restore_op
+    [spec.tensor.dtype])[0])
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_io_ops.py", line 1021, in restore_v2
+    shape_and_slices=shape_and_slices, dtypes=dtypes, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/op_def_library.py", line 787, in _apply_op_helper
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2956, in create_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1470, in __init__
+    self._traceback = self._graph._extract_stack()  # pylint: disable=protected-access
+
+NotFoundError (see above for traceback): Key rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_variance not found in checkpoint
+	 [[Node: save/RestoreV2_323 = RestoreV2[dtypes=[DT_FLOAT], _device="/job:localhost/replica:0/task:0/device:CPU:0"](_arg_save/Const_0_0, save/RestoreV2_323/tensor_names, save/RestoreV2_323/shape_and_slices)]]
+	 [[Node: save/RestoreV2_201/_411 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/device:GPU:0", send_device="/job:localhost/replica:0/task:0/device:CPU:0", send_device_incarnation=1, tensor_name="edge_1478_save/RestoreV2_201", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/device:GPU:0"]()]]
+
+Command exited with non-zero status 1
+14.82user 2.37system 0:15.13elapsed 113%CPU (0avgtext+0avgdata 545120maxresident)k
+352inputs+8outputs (0major+113133minor)pagefaults 0swaps

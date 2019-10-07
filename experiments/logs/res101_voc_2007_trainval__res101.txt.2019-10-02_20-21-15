@@ -1,0 +1,265 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2019-10-02_20-21-15
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2019-10-02_20-21-15
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_200000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python3 ./tools/trainval_net2.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 200000 --cfg experiments/cfgs/res101_rfcn.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE 50000
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101_rfcn.yml', imdb_name='voc_2007_trainval', imdbval_name='voc_2007_test', max_iters=200000, net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'TRAIN.STEPSIZE', '50000'], tag=None, weight='data/imagenet_weights/res101.ckpt')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32],
+ 'CLASSES': 21,
+ 'DATA_DIR': '/home/wjl/projects/tf_rfcnm3/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'res101',
+ 'FOCAL_LOSS': False,
+ 'GPU_ID': 0,
+ 'K': 8,
+ 'MATLAB': 'matlab',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RESNET': {'BN_TRAIN': False, 'FIXED_BLOCKS': 1, 'MAX_POOL': False},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/wjl/projects/tf_rfcnm3',
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 300,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 20,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'OHEM': False,
+           'OHEM_B': 128,
+           'OHEM_NMS_THRESH': 0.7,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'res101_faster_rcnn',
+           'STEPSIZE': 50000,
+           'SUMMARY_INTERVAL': 60,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True}
+Loaded dataset `voc_2007_trainval` for training
+Set proposal method: gt
+Appending horizontally-flipped training examples...
+wrote gt roidb to /home/wjl/projects/tf_rfcnm3/data/cache/voc_2007_trainval_gt_roidb.pkl
+done
+Preparing training data...
+done
+33102 roidb entrie s
+Output will be saved to `/home/wjl/projects/tf_rfcnm3/output/res101/voc_2007_trainval/default`
+TensorFlow summaries will be saved to `/home/wjl/projects/tf_rfcnm3/tensorboard/res101/voc_2007_trainval/default`
+Loaded dataset `voc_2007_test` for training
+Set proposal method: gt
+Preparing training data...
+wrote gt roidb to /home/wjl/projects/tf_rfcnm3/data/cache/voc_2007_test_gt_roidb.pkl
+done
+4952 validation roidb entries
+Filtered 0 roidb entries: 33102 -> 33102
+Filtered 0 roidb entries: 4952 -> 4952
+2019-10-02 20:21:25.088797: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-10-02 20:21:25.169630: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-02 20:21:25.170094: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x2d7a6d0 executing computations on platform CUDA. Devices:
+2019-10-02 20:21:25.170108: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): GeForce RTX 2070 with Max-Q Design, Compute Capability 7.5
+2019-10-02 20:21:25.171627: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2904000000 Hz
+2019-10-02 20:21:25.172581: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x42a7140 executing computations on platform Host. Devices:
+2019-10-02 20:21:25.172591: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2019-10-02 20:21:25.172724: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: GeForce RTX 2070 with Max-Q Design major: 7 minor: 5 memoryClockRate(GHz): 1.185
+pciBusID: 0000:01:00.0
+totalMemory: 7.79GiB freeMemory: 7.35GiB
+2019-10-02 20:21:25.172752: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2019-10-02 20:21:25.173317: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-10-02 20:21:25.173325: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2019-10-02 20:21:25.173329: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2019-10-02 20:21:25.173442: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7153 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070 with Max-Q Design, pci bus id: 0000:01:00.0, compute capability: 7.5)
+Solving...
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:221: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:226: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, use
+    tf.py_function, which takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    
+WARNING:tensorflow:From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/resnet_v1_rfcn_hole.py:370: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+[<tf.Variable 'resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/rpn_conv/3x3/weights:0' shape=(3, 3, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/rpn_conv/3x3/biases:0' shape=(512,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/rpn_cls_score/weights:0' shape=(1, 1, 512, 18) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/rpn_cls_score/biases:0' shape=(18,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/rpn_bbox_pred/weights:0' shape=(1, 1, 512, 36) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/rpn_bbox_pred/biases:0' shape=(36,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 1344) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_classes/biases:0' shape=(1344,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 5376) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_bbox/biases:0' shape=(5376,) dtype=float32_ref>]
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/python/util/dispatch.py:180: calling expand_dims (from tensorflow.python.ops.array_ops) with dim is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the `axis` argument instead
+/usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/gradients_impl.py:110: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+Loading initial model weights from data/imagenet_weights/res101.ckpt
+Unsuccessful TensorSliceReader constructor: Failed to get matching files on data/imagenet_weights/res101.ckpt: Not found: data/imagenet_weights; No such file or directory
+Traceback (most recent call last):
+  File "./tools/trainval_net2.py", line 141, in <module>
+    max_iters=args.max_iters)
+  File "/home/wjl/projects/tf_rfcnm3/tools/../lib/model/train_val.py", line 342, in train_net
+    sw.train_model(sess, max_iters)
+  File "/home/wjl/projects/tf_rfcnm3/tools/../lib/model/train_val.py", line 165, in train_model
+    variables_to_restore = self.net.get_variables_to_restore(variables, var_keep_dic)
+  File "/home/wjl/projects/tf_rfcnm3/tools/../lib/nets/resnet_v1_rfcn_hole.py", line 349, in get_variables_to_restore
+    if v.name.split(':')[0] in var_keep_dic:
+TypeError: argument of type 'NoneType' is not iterable
+Command exited with non-zero status 1
+19.18user 1.79system 0:20.06elapsed 104%CPU (0avgtext+0avgdata 1421004maxresident)k
+3032inputs+29128outputs (11major+458650minor)pagefaults 0swaps

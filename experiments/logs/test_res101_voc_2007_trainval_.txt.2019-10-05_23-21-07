@@ -1,0 +1,209 @@
++ echo Logging output to experiments/logs/test_res101_voc_2007_trainval_.txt.2019-10-05_23-21-07
+Logging output to experiments/logs/test_res101_voc_2007_trainval_.txt.2019-10-05_23-21-07
++ set +x
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python3 ./tools/test_net.py --imdb voc_2007_test --model output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_150000.ckpt --cfg experiments/cfgs/res101_rfcn.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101_rfcn.yml', comp_mode=False, imdb_name='voc_2007_test', max_per_image=100, model='output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_150000.ckpt', net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32],
+ 'CLASSES': 21,
+ 'DATA_DIR': '/home/wjl/projects/tf_rfcnm3/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'res101',
+ 'FOCAL_LOSS': False,
+ 'GPU_ID': 0,
+ 'K': 8,
+ 'MATLAB': 'matlab',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RESNET': {'BN_TRAIN': False, 'FIXED_BLOCKS': 1, 'MAX_POOL': False},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/wjl/projects/tf_rfcnm3',
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 300,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 20,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'OHEM': False,
+           'OHEM_B': 128,
+           'OHEM_NMS_THRESH': 0.7,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'res101_faster_rcnn',
+           'STEPSIZE': 80000,
+           'SUMMARY_INTERVAL': 60,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True}
+WARNING: Logging before flag parsing goes to stderr.
+W1005 23:21:09.063870 140489497618240 deprecation_wrapper.py:119] From ./tools/test_net.py:87: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
+
+W1005 23:21:09.064028 140489497618240 deprecation_wrapper.py:119] From ./tools/test_net.py:91: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+
+2019-10-05 23:21:09.064333: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-10-05 23:21:09.069216: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2019-10-05 23:21:09.151829: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1005] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-05 23:21:09.152182: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5198bb0 executing computations on platform CUDA. Devices:
+2019-10-05 23:21:09.152194: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2070 with Max-Q Design, Compute Capability 7.5
+2019-10-05 23:21:09.153869: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2904000000 Hz
+2019-10-05 23:21:09.154539: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x543ff20 executing computations on platform Host. Devices:
+2019-10-05 23:21:09.154552: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2019-10-05 23:21:09.154941: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1005] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-05 23:21:09.155316: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 0 with properties: 
+name: GeForce RTX 2070 with Max-Q Design major: 7 minor: 5 memoryClockRate(GHz): 1.185
+pciBusID: 0000:01:00.0
+2019-10-05 23:21:09.155413: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-10-05 23:21:09.156236: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+2019-10-05 23:21:09.157060: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcufft.so.10.0
+2019-10-05 23:21:09.157291: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcurand.so.10.0
+2019-10-05 23:21:09.158295: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusolver.so.10.0
+2019-10-05 23:21:09.158988: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusparse.so.10.0
+2019-10-05 23:21:09.161097: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2019-10-05 23:21:09.161188: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1005] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-05 23:21:09.161603: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1005] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-05 23:21:09.161893: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1763] Adding visible gpu devices: 0
+2019-10-05 23:21:09.161921: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2019-10-05 23:21:09.162823: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1181] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-10-05 23:21:09.162833: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1187]      0 
+2019-10-05 23:21:09.162837: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 0:   N 
+2019-10-05 23:21:09.162903: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1005] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-05 23:21:09.163270: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:1005] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-10-05 23:21:09.163523: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7059 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2070 with Max-Q Design, pci bus id: 0000:01:00.0, compute capability: 7.5)
+W1005 23:21:09.164975 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:597: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+W1005 23:21:09.166465 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:622: The name tf.no_regularizer is deprecated. Please use tf.compat.v1.no_regularizer instead.
+
+W1005 23:21:09.166875 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/resnet_v1_rfcn_hole.py:168: The name tf.variable_scope is deprecated. Please use tf.compat.v1.variable_scope instead.
+
+W1005 23:21:11.858120 140489497618240 deprecation.py:323] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:221: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W1005 23:21:11.861328 140489497618240 deprecation.py:323] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:226: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, there are two
+    options available in V2.
+    - tf.py_function takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    - tf.numpy_function maintains the semantics of the deprecated tf.py_func
+    (it is not differentiable, and manipulates numpy arrays). It drops the
+    stateful argument making all functions stateful.
+    
+W1005 23:21:11.938426 140489497618240 deprecation.py:323] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/resnet_v1_rfcn_hole.py:370: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W1005 23:21:12.232362 140489497618240 deprecation.py:506] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/resnet_v1_rfcn_hole.py:313: calling crop_and_resize_v1 (from tensorflow.python.ops.image_ops_impl) with box_ind is deprecated and will be removed in a future version.
+Instructions for updating:
+box_ind is deprecated, use box_indices instead
+[<tf.Variable 'resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 1344) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_classes/biases:0' shape=(1344,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 5376) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_bbox/biases:0' shape=(5376,) dtype=float32_ref>]
+W1005 23:21:12.398931 140489497618240 deprecation.py:506] From /usr/local/lib/python3.6/dist-packages/tensorflow/python/util/dispatch.py:180: calling expand_dims (from tensorflow.python.ops.array_ops) with dim is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the `axis` argument instead
+W1005 23:21:12.400106 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:64: The name tf.summary.image is deprecated. Please use tf.compat.v1.summary.image instead.
+
+W1005 23:21:12.401063 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:72: The name tf.summary.histogram is deprecated. Please use tf.compat.v1.summary.histogram instead.
+
+W1005 23:21:12.407309 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:68: The name tf.summary.scalar is deprecated. Please use tf.compat.v1.summary.scalar instead.
+
+W1005 23:21:12.433939 140489497618240 deprecation_wrapper.py:119] From /home/wjl/projects/tf_rfcnm3/tools/../lib/nets/network.py:671: The name tf.summary.merge_all is deprecated. Please use tf.compat.v1.summary.merge_all instead.
+
+Loading model check point from output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_150000.ckpt
+W1005 23:21:12.434654 140489497618240 deprecation_wrapper.py:119] From ./tools/test_net.py:113: The name tf.train.Saver is deprecated. Please use tf.compat.v1.train.Saver instead.
+
+W1005 23:21:12.766662 140489497618240 deprecation.py:323] From /usr/local/lib/python3.6/dist-packages/tensorflow/python/training/saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Loaded.
+2019-10-05 23:21:14.422504: W tensorflow/compiler/jit/mark_for_compilation_pass.cc:1412] (One-time warning): Not using XLA:CPU for cluster because envvar TF_XLA_FLAGS=--tf_xla_cpu_global_jit was not set.  If you want XLA:CPU, either set that envvar, or use experimental_jit_scope to enable XLA:CPU.  To confirm that XLA is active, pass --vmodule=xla_compilation_cache=1 (as a proper command-line flag, not via TF_XLA_FLAGS) or set the envvar XLA_FLAGS=--xla_hlo_profile.
+2019-10-05 23:21:14.470314: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+im_detect: 1/4952 2.955s 0.001s
+im_detect: 2/4952 2.095s 0.001s
+im_detect: 3/4952 1.796s 0.001s
+im_detect: 4/4952 1.637s 0.001s
+im_detect: 5/4952 1.329s 0.001s
+im_detect: 6/4952 1.125s 0.001s
+im_detect: 7/4952 1.138s 0.001s
+im_detect: 8/4952 1.152s 0.001s
+im_detect: 9/4952 1.035s 0.001s
+im_detect: 10/4952 1.057s 0.001s
+im_detect: 11/4952 0.970s 0.001s
+im_detect: 12/4952 0.897s 0.001s
+im_detect: 13/4952 0.842s 0.001s
+im_detect: 14/4952 0.789s 0.001s
+im_detect: 15/4952 0.812s 0.001s
+im_detect: 16/4952 0.838s 0.001s
+im_detect: 17/4952 0.824s 0.001s
+im_detect: 18/4952 0.849s 0.001s
+im_detect: 19/4952 0.809s 0.001s
+im_detect: 20/4952 0.773s 0.001s
+im_detect: 21/4952 0.742s 0.001s
+im_detect: 22/4952 0.766s 0.001s
+im_detect: 23/4952 0.737s 0.001s
+im_detect: 24/4952 0.759s 0.001s
+im_detect: 25/4952 0.732s 0.001s
+im_detect: 26/4952 0.708s 0.001s
+im_detect: 27/4952 0.685s 0.001s
+im_detect: 28/4952 0.675s 0.001s
+im_detect: 29/4952 0.655s 0.001s
+im_detect: 30/4952 0.637s 0.001s
+im_detect: 31/4952 0.620s 0.001s
+im_detect: 32/4952 0.604s 0.001s
+im_detect: 33/4952 0.624s 0.001s
+im_detect: 34/4952 0.608s 0.001s
+im_detect: 35/4952 0.594s 0.001s

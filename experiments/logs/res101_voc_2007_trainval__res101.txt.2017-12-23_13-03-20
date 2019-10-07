@@ -1,0 +1,1097 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-23_13-03-20
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-23_13-03-20
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 250000 --cfg experiments/cfgs/res101_rfcn_ohem.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE 50000
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101_rfcn_ohem.yml', imdb_name='voc_2007_trainval', imdbval_name='voc_2007_test', max_iters=250000, net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'TRAIN.STEPSIZE', '50000'], tag=None, weight='data/imagenet_weights/res101.ckpt')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32],
+ 'CLASSES': 6,
+ 'DATA_DIR': '/home/wjl/tf_rfcn/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'res101',
+ 'FOCAL_LOSS': False,
+ 'GPU_ID': 0,
+ 'K': 3,
+ 'MATLAB': 'matlab',
+ 'PIXEL_MEANS': array([[[ 102.9801,  115.9465,  122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RESNET': {'BN_TRAIN': False, 'FIXED_BLOCKS': 1, 'MAX_POOL': False},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/wjl/tf_rfcn',
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 300,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 20,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'OHEM': True,
+           'OHEM_B': 128,
+           'OHEM_NMS_THRESH': 0.7,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'res101_faster_rcnn',
+           'STEPSIZE': 50000,
+           'SUMMARY_INTERVAL': 60,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True}
+Loaded dataset `voc_2007_trainval` for training
+Set proposal method: gt
+Appending horizontally-flipped training examples...
+voc_2007_trainval gt roidb loaded from /home/wjl/tf_rfcn/data/cache/voc_2007_trainval_gt_roidb.pkl
+done
+Preparing training data...
+done
+9614 roidb entrie s
+Output will be saved to `/home/wjl/tf_rfcn/output/res101/voc_2007_trainval/default`
+TensorFlow summaries will be saved to `/home/wjl/tf_rfcn/tensorboard/res101/voc_2007_trainval/default`
+Loaded dataset `voc_2007_test` for training
+Set proposal method: gt
+Preparing training data...
+voc_2007_test gt roidb loaded from /home/wjl/tf_rfcn/data/cache/voc_2007_test_gt_roidb.pkl
+done
+4807 validation roidb entries
+Filtered 0 roidb entries: 9614 -> 9614
+Filtered 0 roidb entries: 4807 -> 4807
+2017-12-23 13:03:25.670414: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2017-12-23 13:03:25.899979: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.62
+pciBusID: 0000:03:00.0
+totalMemory: 10.91GiB freeMemory: 10.14GiB
+2017-12-23 13:03:25.900048: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:03:00.0, compute capability: 6.1)
+Solving...
+[<tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/weights:0' shape=(3, 3, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/biases:0' shape=(512,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/weights:0' shape=(1, 1, 512, 18) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/biases:0' shape=(18,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/weights:0' shape=(1, 1, 512, 36) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/biases:0' shape=(36,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 189) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/biases:0' shape=(189,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 756) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/biases:0' shape=(756,) dtype=float32_ref>]
+[<tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/weights:0' shape=(3, 3, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/biases:0' shape=(512,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/weights:0' shape=(1, 1, 512, 18) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/biases:0' shape=(18,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/weights:0' shape=(1, 1, 512, 36) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/biases:0' shape=(36,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 189) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/biases:0' shape=(189,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 756) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/biases:0' shape=(756,) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 189) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_classes/biases:0' shape=(189,) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 756) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_bbox/biases:0' shape=(756,) dtype=float32_ref>]
+/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gradients_impl.py:96: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+Restorining model snapshots from /home/wjl/tf_rfcn/output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_125000.ckpt
+Restored.
+iter: 125020 / 250000, stage: stage2, total loss: 0.015149
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.007762
+ >>> loss_box: 0.007387
+ >>> lr: 0.000100
+speed: 0.309s / iter
+iter: 125040 / 250000, stage: stage2, total loss: 0.849073
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.425794
+ >>> loss_box: 0.423279
+ >>> lr: 0.000100
+speed: 0.253s / iter
+iter: 125060 / 250000, stage: stage2, total loss: 0.041645
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.021092
+ >>> loss_box: 0.020552
+ >>> lr: 0.000100
+speed: 0.228s / iter
+iter: 125080 / 250000, stage: stage2, total loss: 0.059710
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.030130
+ >>> loss_box: 0.029580
+ >>> lr: 0.000100
+speed: 0.216s / iter
+iter: 125100 / 250000, stage: stage2, total loss: 0.046663
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.023798
+ >>> loss_box: 0.022865
+ >>> lr: 0.000100
+speed: 0.211s / iter
+iter: 125120 / 250000, stage: stage2, total loss: 0.305103
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.153909
+ >>> loss_box: 0.151194
+ >>> lr: 0.000100
+speed: 0.206s / iter
+iter: 125140 / 250000, stage: stage2, total loss: 0.084354
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.043397
+ >>> loss_box: 0.040957
+ >>> lr: 0.000100
+speed: 0.203s / iter
+iter: 125160 / 250000, stage: stage2, total loss: 0.063772
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.032909
+ >>> loss_box: 0.030863
+ >>> lr: 0.000100
+speed: 0.213s / iter
+iter: 125180 / 250000, stage: stage2, total loss: 0.026383
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.013201
+ >>> loss_box: 0.013183
+ >>> lr: 0.000100
+speed: 0.210s / iter
+iter: 125200 / 250000, stage: stage2, total loss: 0.937358
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.468785
+ >>> loss_box: 0.468573
+ >>> lr: 0.000100
+speed: 0.207s / iter
+iter: 125220 / 250000, stage: stage2, total loss: 0.123760
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.063000
+ >>> loss_box: 0.060760
+ >>> lr: 0.000100
+speed: 0.205s / iter
+iter: 125240 / 250000, stage: stage2, total loss: 0.012304
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.006153
+ >>> loss_box: 0.006150
+ >>> lr: 0.000100
+speed: 0.203s / iter
+iter: 125260 / 250000, stage: stage2, total loss: 0.041456
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.020743
+ >>> loss_box: 0.020713
+ >>> lr: 0.000100
+speed: 0.202s / iter
+iter: 125280 / 250000, stage: stage2, total loss: 0.172659
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.086336
+ >>> loss_box: 0.086323
+ >>> lr: 0.000100
+speed: 0.200s / iter
+iter: 125300 / 250000, stage: stage2, total loss: 0.229413
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.119725
+ >>> loss_box: 0.109688
+ >>> lr: 0.000100
+speed: 0.202s / iter
+iter: 125320 / 250000, stage: stage2, total loss: 0.048604
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.024840
+ >>> loss_box: 0.023765
+ >>> lr: 0.000100
+speed: 0.200s / iter
+iter: 125340 / 250000, stage: stage2, total loss: 0.073237
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.036626
+ >>> loss_box: 0.036611
+ >>> lr: 0.000100
+speed: 0.199s / iter
+iter: 125360 / 250000, stage: stage2, total loss: 0.042029
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.021024
+ >>> loss_box: 0.021005
+ >>> lr: 0.000100
+speed: 0.198s / iter
+iter: 125380 / 250000, stage: stage2, total loss: 0.084437
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.042364
+ >>> loss_box: 0.042073
+ >>> lr: 0.000100
+speed: 0.198s / iter
+iter: 125400 / 250000, stage: stage2, total loss: 0.132558
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.066291
+ >>> loss_box: 0.066266
+ >>> lr: 0.000100
+speed: 0.197s / iter
+iter: 125420 / 250000, stage: stage2, total loss: 0.054917
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.027732
+ >>> loss_box: 0.027185
+ >>> lr: 0.000100
+speed: 0.196s / iter
+iter: 125440 / 250000, stage: stage2, total loss: 0.075138
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.037614
+ >>> loss_box: 0.037524
+ >>> lr: 0.000100
+speed: 0.198s / iter
+iter: 125460 / 250000, stage: stage2, total loss: 0.043857
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.022413
+ >>> loss_box: 0.021444
+ >>> lr: 0.000100
+speed: 0.198s / iter
+iter: 125480 / 250000, stage: stage2, total loss: 0.030286
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.015412
+ >>> loss_box: 0.014874
+ >>> lr: 0.000100
+speed: 0.197s / iter
+iter: 125500 / 250000, stage: stage2, total loss: 0.043600
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.021880
+ >>> loss_box: 0.021719
+ >>> lr: 0.000100
+speed: 0.196s / iter
+iter: 125520 / 250000, stage: stage2, total loss: 0.168518
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.086708
+ >>> loss_box: 0.081810
+ >>> lr: 0.000100
+speed: 0.196s / iter
+iter: 125540 / 250000, stage: stage2, total loss: 0.098972
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.050293
+ >>> loss_box: 0.048679
+ >>> lr: 0.000100
+speed: 0.195s / iter
+iter: 125560 / 250000, stage: stage2, total loss: 0.026503
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.013421
+ >>> loss_box: 0.013082
+ >>> lr: 0.000100
+speed: 0.194s / iter
+iter: 125580 / 250000, stage: stage2, total loss: 0.140562
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.072199
+ >>> loss_box: 0.068363
+ >>> lr: 0.000100
+speed: 0.194s / iter
+iter: 125600 / 250000, stage: stage2, total loss: 0.120763
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.061496
+ >>> loss_box: 0.059267
+ >>> lr: 0.000100
+speed: 0.195s / iter
+iter: 125620 / 250000, stage: stage2, total loss: 0.103722
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.051903
+ >>> loss_box: 0.051819
+ >>> lr: 0.000100
+speed: 0.195s / iter
+iter: 125640 / 250000, stage: stage2, total loss: 0.023067
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.011639
+ >>> loss_box: 0.011428
+ >>> lr: 0.000100
+speed: 0.194s / iter
+iter: 125660 / 250000, stage: stage2, total loss: 0.046271
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.023404
+ >>> loss_box: 0.022867
+ >>> lr: 0.000100
+speed: 0.194s / iter
+iter: 125680 / 250000, stage: stage2, total loss: 0.030154
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.015483
+ >>> loss_box: 0.014672
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125700 / 250000, stage: stage2, total loss: 0.060319
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.030191
+ >>> loss_box: 0.030128
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125720 / 250000, stage: stage2, total loss: 0.018820
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.009435
+ >>> loss_box: 0.009385
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125740 / 250000, stage: stage2, total loss: 0.022717
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.011377
+ >>> loss_box: 0.011340
+ >>> lr: 0.000100
+speed: 0.194s / iter
+iter: 125760 / 250000, stage: stage2, total loss: 0.201539
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.102850
+ >>> loss_box: 0.098688
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125780 / 250000, stage: stage2, total loss: 0.053974
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.027012
+ >>> loss_box: 0.026962
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125800 / 250000, stage: stage2, total loss: 0.110357
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.055606
+ >>> loss_box: 0.054751
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125820 / 250000, stage: stage2, total loss: 0.017288
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.008694
+ >>> loss_box: 0.008593
+ >>> lr: 0.000100
+speed: 0.193s / iter
+iter: 125840 / 250000, stage: stage2, total loss: 0.051252
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.025663
+ >>> loss_box: 0.025589
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125860 / 250000, stage: stage2, total loss: 0.286709
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.143421
+ >>> loss_box: 0.143288
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125880 / 250000, stage: stage2, total loss: 0.006236
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.003121
+ >>> loss_box: 0.003114
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125900 / 250000, stage: stage2, total loss: 0.167315
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.084069
+ >>> loss_box: 0.083246
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125920 / 250000, stage: stage2, total loss: 0.068694
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.034358
+ >>> loss_box: 0.034336
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125940 / 250000, stage: stage2, total loss: 0.057455
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.028764
+ >>> loss_box: 0.028691
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125960 / 250000, stage: stage2, total loss: 0.201725
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.100867
+ >>> loss_box: 0.100857
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 125980 / 250000, stage: stage2, total loss: 0.035864
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.017954
+ >>> loss_box: 0.017910
+ >>> lr: 0.000100
+speed: 0.192s / iter
+iter: 126000 / 250000, stage: stage2, total loss: 0.106205
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.053110
+ >>> loss_box: 0.053095
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126020 / 250000, stage: stage2, total loss: 0.025696
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.013003
+ >>> loss_box: 0.012694
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126040 / 250000, stage: stage2, total loss: 0.032903
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.016453
+ >>> loss_box: 0.016450
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126060 / 250000, stage: stage2, total loss: 0.042265
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.021735
+ >>> loss_box: 0.020530
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126080 / 250000, stage: stage2, total loss: 0.015387
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.007806
+ >>> loss_box: 0.007581
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126100 / 250000, stage: stage2, total loss: 0.052634
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.026426
+ >>> loss_box: 0.026209
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126120 / 250000, stage: stage2, total loss: 0.157337
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.078717
+ >>> loss_box: 0.078621
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126140 / 250000, stage: stage2, total loss: 0.554626
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.277324
+ >>> loss_box: 0.277302
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126160 / 250000, stage: stage2, total loss: 0.199266
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.099642
+ >>> loss_box: 0.099624
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126180 / 250000, stage: stage2, total loss: 0.103179
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.051610
+ >>> loss_box: 0.051569
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126200 / 250000, stage: stage2, total loss: 0.041666
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.020933
+ >>> loss_box: 0.020734
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126220 / 250000, stage: stage2, total loss: 0.450499
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.225886
+ >>> loss_box: 0.224613
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126240 / 250000, stage: stage2, total loss: 0.343197
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.171612
+ >>> loss_box: 0.171585
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126260 / 250000, stage: stage2, total loss: 0.103667
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.051854
+ >>> loss_box: 0.051813
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126280 / 250000, stage: stage2, total loss: 0.111768
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.056864
+ >>> loss_box: 0.054904
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126300 / 250000, stage: stage2, total loss: 0.013354
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.006685
+ >>> loss_box: 0.006669
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126320 / 250000, stage: stage2, total loss: 0.091173
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.046883
+ >>> loss_box: 0.044290
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126340 / 250000, stage: stage2, total loss: 0.118141
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.060416
+ >>> loss_box: 0.057725
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126360 / 250000, stage: stage2, total loss: 0.159546
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.079820
+ >>> loss_box: 0.079726
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126380 / 250000, stage: stage2, total loss: 0.052911
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.026785
+ >>> loss_box: 0.026127
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126400 / 250000, stage: stage2, total loss: 0.039439
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.019722
+ >>> loss_box: 0.019717
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126420 / 250000, stage: stage2, total loss: 0.016766
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.008557
+ >>> loss_box: 0.008209
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126440 / 250000, stage: stage2, total loss: 0.004984
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.002493
+ >>> loss_box: 0.002491
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126460 / 250000, stage: stage2, total loss: 0.121345
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.060785
+ >>> loss_box: 0.060560
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126480 / 250000, stage: stage2, total loss: 0.245367
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.124557
+ >>> loss_box: 0.120810
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126500 / 250000, stage: stage2, total loss: 0.044050
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.022052
+ >>> loss_box: 0.021998
+ >>> lr: 0.000100
+speed: 0.191s / iter
+iter: 126520 / 250000, stage: stage2, total loss: 0.210488
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.105341
+ >>> loss_box: 0.105147
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126540 / 250000, stage: stage2, total loss: 0.015908
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.007982
+ >>> loss_box: 0.007926
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126560 / 250000, stage: stage2, total loss: 0.022942
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.011522
+ >>> loss_box: 0.011420
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126580 / 250000, stage: stage2, total loss: 0.106922
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.053495
+ >>> loss_box: 0.053428
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126600 / 250000, stage: stage2, total loss: 0.169233
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.084620
+ >>> loss_box: 0.084613
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126620 / 250000, stage: stage2, total loss: 0.070708
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.036053
+ >>> loss_box: 0.034655
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126640 / 250000, stage: stage2, total loss: 0.139960
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.072029
+ >>> loss_box: 0.067931
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126660 / 250000, stage: stage2, total loss: 0.495217
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.247767
+ >>> loss_box: 0.247450
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126680 / 250000, stage: stage2, total loss: 0.023065
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.012034
+ >>> loss_box: 0.011032
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126700 / 250000, stage: stage2, total loss: 0.089390
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.045888
+ >>> loss_box: 0.043502
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126720 / 250000, stage: stage2, total loss: 0.270034
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.137814
+ >>> loss_box: 0.132220
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126740 / 250000, stage: stage2, total loss: 0.024429
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.012218
+ >>> loss_box: 0.012211
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126760 / 250000, stage: stage2, total loss: 0.076621
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.038767
+ >>> loss_box: 0.037855
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126780 / 250000, stage: stage2, total loss: 0.052532
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.026882
+ >>> loss_box: 0.025649
+ >>> lr: 0.000100
+speed: 0.189s / iter
+iter: 126800 / 250000, stage: stage2, total loss: 0.028381
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.014194
+ >>> loss_box: 0.014186
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126820 / 250000, stage: stage2, total loss: 0.112347
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.057106
+ >>> loss_box: 0.055242
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126840 / 250000, stage: stage2, total loss: 0.121694
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.061510
+ >>> loss_box: 0.060184
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126860 / 250000, stage: stage2, total loss: 0.032506
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.016261
+ >>> loss_box: 0.016246
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126880 / 250000, stage: stage2, total loss: 0.083757
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.041884
+ >>> loss_box: 0.041873
+ >>> lr: 0.000100
+speed: 0.190s / iter
+iter: 126900 / 250000, stage: stage2, total loss: 0.082314
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.042378
+ >>> loss_box: 0.039936
+ >>> lr: 0.000100
+speed: 0.189s / iter
+iter: 126920 / 250000, stage: stage2, total loss: 0.169955
+ >>> rpn_loss_cls: 0.000000
+ >>> rpn_loss_box: 0.000000
+ >>> loss_cls: 0.084980
+ >>> loss_box: 0.084975
+ >>> lr: 0.000100
+speed: 0.189s / iter

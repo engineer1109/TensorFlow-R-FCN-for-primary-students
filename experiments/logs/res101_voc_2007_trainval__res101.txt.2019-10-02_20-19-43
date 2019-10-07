@@ -1,0 +1,18 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2019-10-02_20-19-43
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2019-10-02_20-19-43
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_200000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net2.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 200000 --cfg experiments/cfgs/res101_rfcn.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE 50000
+Traceback (most recent call last):
+  File "./tools/trainval_net2.py", line 13, in <module>
+    from model.train_val import get_training_roidb, train_net
+  File "/home/wjl/projects/tf_rfcnm3/tools/../lib/model/train_val.py", line 11, in <module>
+    import roi_data_layer.roidb as rdl_roidb
+  File "/home/wjl/projects/tf_rfcnm3/tools/../lib/roi_data_layer/roidb.py", line 16, in <module>
+    from utils.cython_bbox import bbox_overlaps
+ImportError: No module named cython_bbox
+Command exited with non-zero status 1
+0.55user 0.53system 0:00.14elapsed 740%CPU (0avgtext+0avgdata 25688maxresident)k
+8inputs+80outputs (0major+3811minor)pagefaults 0swaps

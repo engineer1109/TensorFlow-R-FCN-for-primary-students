@@ -1,0 +1,18 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-23_12-37-38
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-23_12-37-38
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 250000 --cfg experiments/cfgs/res101_rfcn_ohem.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101_rfcn_ohem.yml', imdb_name='voc_2007_trainval', imdbval_name='voc_2007_test', max_iters=250000, net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'TRAIN.STEPSIZE'], tag=None, weight='data/imagenet_weights/res101.ckpt')
+Traceback (most recent call last):
+  File "./tools/trainval_net.py", line 95, in <module>
+    cfg_from_list(args.set_cfgs)
+  File "/home/wjl/tf_rfcn/tools/../lib/model/config.py", line 366, in cfg_from_list
+    assert len(cfg_list) % 2 == 0
+AssertionError
+Command exited with non-zero status 1
+1.65user 0.87system 0:01.84elapsed 136%CPU (0avgtext+0avgdata 253784maxresident)k
+35800inputs+8outputs (212major+50982minor)pagefaults 0swaps

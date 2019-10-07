@@ -1,0 +1,14 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-23_13-25-44
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-23_13-25-44
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net2.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 250000 --cfg experiments/cfgs/res101_rfcn_ohem.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE 50000
+Traceback (most recent call last):
+  File "./tools/trainval_net2.py", line 27, in <module>
+    from nets.resnet_v1_rfcn_hole_local_global_elements_wise import resnetv1
+ImportError: No module named resnet_v1_rfcn_hole_local_global_elements_wise
+Command exited with non-zero status 1
+1.56user 0.80system 0:01.59elapsed 148%CPU (0avgtext+0avgdata 253936maxresident)k
+0inputs+32outputs (0major+53039minor)pagefaults 0swaps

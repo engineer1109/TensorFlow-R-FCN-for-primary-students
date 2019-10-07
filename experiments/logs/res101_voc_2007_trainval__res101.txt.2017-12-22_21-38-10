@@ -1,0 +1,14 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-22_21-38-10
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-22_21-38-10
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 250000 --cfg experiments/cfgs/res101.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE '[50000]'
+Traceback (most recent call last):
+  File "./tools/trainval_net.py", line 13, in <module>
+    from model.train_val import get_training_roidb, train_net
+ImportError: No module named model.train_val
+Command exited with non-zero status 1
+0.00user 0.00system 0:00.01elapsed 84%CPU (0avgtext+0avgdata 6748maxresident)k
+0inputs+0outputs (0major+878minor)pagefaults 0swaps

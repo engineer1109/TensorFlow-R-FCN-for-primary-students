@@ -1,0 +1,2543 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-22_22-02-25
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2017-12-22_22-02-25
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_250000.ckpt.index ']'
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/trainval_net.py --weight data/imagenet_weights/res101.ckpt --imdb voc_2007_trainval --imdbval voc_2007_test --iters 250000 --cfg experiments/cfgs/res101.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]' TRAIN.STEPSIZE '[50000]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101.yml', imdb_name='voc_2007_trainval', imdbval_name='voc_2007_test', max_iters=250000, net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'TRAIN.STEPSIZE', '[50000]'], tag=None, weight='data/imagenet_weights/res101.ckpt')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32],
+ 'CLASSES': 5,
+ 'DATA_DIR': '/home/wjl/tf_rfcn/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'res101',
+ 'FOCAL_LOSS': False,
+ 'GPU_ID': 0,
+ 'K': 3,
+ 'MATLAB': 'matlab',
+ 'PIXEL_MEANS': array([[[ 102.9801,  115.9465,  122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RESNET': {'BN_TRAIN': False, 'FIXED_BLOCKS': 1, 'MAX_POOL': False},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/wjl/tf_rfcn',
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 256,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 20,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'OHEM': False,
+           'OHEM_B': 128,
+           'OHEM_NMS_THRESH': 0.7,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'res101_faster_rcnn',
+           'STEPSIZE': 30000,
+           'SUMMARY_INTERVAL': 180,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True}
+Loaded dataset `voc_2007_trainval` for training
+Set proposal method: gt
+Appending horizontally-flipped training examples...
+voc_2007_trainval gt roidb loaded from /home/wjl/tf_rfcn/data/cache/voc_2007_trainval_gt_roidb.pkl
+done
+Preparing training data...
+done
+9614 roidb entrie s
+Output will be saved to `/home/wjl/tf_rfcn/output/res101/voc_2007_trainval/default`
+TensorFlow summaries will be saved to `/home/wjl/tf_rfcn/tensorboard/res101/voc_2007_trainval/default`
+Loaded dataset `voc_2007_test` for training
+Set proposal method: gt
+Preparing training data...
+voc_2007_test gt roidb loaded from /home/wjl/tf_rfcn/data/cache/voc_2007_test_gt_roidb.pkl
+done
+4807 validation roidb entries
+Filtered 0 roidb entries: 9614 -> 9614
+Filtered 0 roidb entries: 4807 -> 4807
+2017-12-22 22:02:31.037964: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2017-12-22 22:02:31.261545: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.62
+pciBusID: 0000:03:00.0
+totalMemory: 10.91GiB freeMemory: 10.16GiB
+2017-12-22 22:02:31.261579: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:03:00.0, compute capability: 6.1)
+Solving...
+[<tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/weights:0' shape=(3, 3, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/biases:0' shape=(512,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/weights:0' shape=(1, 1, 512, 18) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/biases:0' shape=(18,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/weights:0' shape=(1, 1, 512, 36) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/biases:0' shape=(36,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 189) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/biases:0' shape=(189,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 756) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/biases:0' shape=(756,) dtype=float32_ref>]
+[<tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/weights:0' shape=(3, 3, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_conv/3x3/biases:0' shape=(512,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/weights:0' shape=(1, 1, 512, 18) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_cls_score/biases:0' shape=(18,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/weights:0' shape=(1, 1, 512, 36) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/rpn_bbox_pred/biases:0' shape=(36,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 189) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_classes/biases:0' shape=(189,) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 756) dtype=float32_ref>,
+ <tf.Variable 'rpn_network/resnet_v1_101/refined_bbox/biases:0' shape=(756,) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 256, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 256, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 128, 128) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 128, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 512, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 512, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0' shape=(3, 3, 256, 256) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0' shape=(1, 1, 256, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0' shape=(1, 1, 1024, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0' shape=(1, 1, 1024, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0' shape=(1, 1, 2048, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0' shape=(3, 3, 512, 512) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0' shape=(1, 1, 512, 2048) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 189) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_classes/biases:0' shape=(189,) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 756) dtype=float32_ref>,
+ <tf.Variable 'rfcn_network/resnet_v1_101/refined_bbox/biases:0' shape=(756,) dtype=float32_ref>]
+/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gradients_impl.py:96: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+Loading initial model weights from data/imagenet_weights/res101.ckpt
+Varibles restored: rpn_network/resnet_v1_101/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+Varibles restored: rpn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block1/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block2/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_4/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_5/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_6/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_7/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_8/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_9/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_10/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_11/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_12/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_13/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_14/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_15/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_16/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_17/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_18/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_19/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_20/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_21/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_22/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block3/unit_23/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_1/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_2/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv1/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv2/BatchNorm/moving_variance:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/weights:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/gamma:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/beta:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_mean:0
+@Varibles restored: rfcn_network/resnet_v1_101/block4/unit_3/bottleneck_v1/conv3/BatchNorm/moving_variance:0
+Loaded.
+Fix Resnet V1 layers..
+Fixed.
+iter: 20 / 250000, stage: stage1, total loss: 0.102842
+ >>> rpn_loss_cls: 0.060802
+ >>> rpn_loss_box: 0.042039
+ >>> loss_cls: 3.058907
+ >>> loss_box: 0.180822
+ >>> lr: 0.001000
+speed: 0.245s / iter
+iter: 40 / 250000, stage: stage1, total loss: 0.093227
+ >>> rpn_loss_cls: 0.013004
+ >>> rpn_loss_box: 0.080223
+ >>> loss_cls: 3.064859
+ >>> loss_box: 0.154941
+ >>> lr: 0.001000
+speed: 0.197s / iter
+iter: 60 / 250000, stage: stage1, total loss: 0.041770
+ >>> rpn_loss_cls: 0.003995
+ >>> rpn_loss_box: 0.037775
+ >>> loss_cls: 3.055746
+ >>> loss_box: 0.182230
+ >>> lr: 0.001000
+speed: 0.174s / iter
+iter: 80 / 250000, stage: stage1, total loss: 0.055602
+ >>> rpn_loss_cls: 0.010125
+ >>> rpn_loss_box: 0.045477
+ >>> loss_cls: 3.049658
+ >>> loss_box: 0.152086
+ >>> lr: 0.001000
+speed: 0.165s / iter
+iter: 100 / 250000, stage: stage1, total loss: 0.040147
+ >>> rpn_loss_cls: 0.007600
+ >>> rpn_loss_box: 0.032547
+ >>> loss_cls: 3.053291
+ >>> loss_box: 0.105099
+ >>> lr: 0.001000
+speed: 0.158s / iter
+iter: 120 / 250000, stage: stage1, total loss: 0.022531
+ >>> rpn_loss_cls: 0.010506
+ >>> rpn_loss_box: 0.012025
+ >>> loss_cls: 3.051131
+ >>> loss_box: 0.166401
+ >>> lr: 0.001000
+speed: 0.153s / iter
+iter: 140 / 250000, stage: stage1, total loss: 0.030337
+ >>> rpn_loss_cls: 0.000591
+ >>> rpn_loss_box: 0.029746
+ >>> loss_cls: 3.054965
+ >>> loss_box: 0.181151
+ >>> lr: 0.001000
+speed: 0.150s / iter
+iter: 160 / 250000, stage: stage1, total loss: 0.016483
+ >>> rpn_loss_cls: 0.006236
+ >>> rpn_loss_box: 0.010246
+ >>> loss_cls: 3.049889
+ >>> loss_box: 0.130710
+ >>> lr: 0.001000
+speed: 0.150s / iter
+iter: 180 / 250000, stage: stage1, total loss: 0.025480
+ >>> rpn_loss_cls: 0.001566
+ >>> rpn_loss_box: 0.023914
+ >>> loss_cls: 3.047841
+ >>> loss_box: 0.137020
+ >>> lr: 0.001000
+speed: 0.149s / iter
+iter: 200 / 250000, stage: stage1, total loss: 0.015017
+ >>> rpn_loss_cls: 0.009606
+ >>> rpn_loss_box: 0.005411
+ >>> loss_cls: 3.040353
+ >>> loss_box: 0.220491
+ >>> lr: 0.001000
+speed: 0.147s / iter
+iter: 220 / 250000, stage: stage1, total loss: 0.010475
+ >>> rpn_loss_cls: 0.002534
+ >>> rpn_loss_box: 0.007941
+ >>> loss_cls: 3.045904
+ >>> loss_box: 0.139828
+ >>> lr: 0.001000
+speed: 0.145s / iter
+iter: 240 / 250000, stage: stage1, total loss: 0.006660
+ >>> rpn_loss_cls: 0.004119
+ >>> rpn_loss_box: 0.002541
+ >>> loss_cls: 3.045481
+ >>> loss_box: 0.175062
+ >>> lr: 0.001000
+speed: 0.144s / iter
+iter: 260 / 250000, stage: stage1, total loss: 0.022716
+ >>> rpn_loss_cls: 0.002103
+ >>> rpn_loss_box: 0.020614
+ >>> loss_cls: 3.050296
+ >>> loss_box: 0.094026
+ >>> lr: 0.001000
+speed: 0.143s / iter
+iter: 280 / 250000, stage: stage1, total loss: 0.013652
+ >>> rpn_loss_cls: 0.001447
+ >>> rpn_loss_box: 0.012205
+ >>> loss_cls: 3.041307
+ >>> loss_box: 0.139713
+ >>> lr: 0.001000
+speed: 0.143s / iter
+iter: 300 / 250000, stage: stage1, total loss: 0.005670
+ >>> rpn_loss_cls: 0.001931
+ >>> rpn_loss_box: 0.003739
+ >>> loss_cls: 3.048087
+ >>> loss_box: 0.173157
+ >>> lr: 0.001000
+speed: 0.143s / iter
+iter: 320 / 250000, stage: stage1, total loss: 0.003083
+ >>> rpn_loss_cls: 0.001237
+ >>> rpn_loss_box: 0.001847
+ >>> loss_cls: 3.049284
+ >>> loss_box: 0.121335
+ >>> lr: 0.001000
+speed: 0.142s / iter
+iter: 340 / 250000, stage: stage1, total loss: 0.013955
+ >>> rpn_loss_cls: 0.000349
+ >>> rpn_loss_box: 0.013606
+ >>> loss_cls: 3.056236
+ >>> loss_box: 0.228472
+ >>> lr: 0.001000
+speed: 0.142s / iter
+iter: 360 / 250000, stage: stage1, total loss: 0.010063
+ >>> rpn_loss_cls: 0.003437
+ >>> rpn_loss_box: 0.006625
+ >>> loss_cls: 3.052658
+ >>> loss_box: 0.144207
+ >>> lr: 0.001000
+speed: 0.141s / iter
+iter: 380 / 250000, stage: stage1, total loss: 0.014647
+ >>> rpn_loss_cls: 0.002361
+ >>> rpn_loss_box: 0.012287
+ >>> loss_cls: 3.047712
+ >>> loss_box: 0.109316
+ >>> lr: 0.001000
+speed: 0.141s / iter
+iter: 400 / 250000, stage: stage1, total loss: 0.022163
+ >>> rpn_loss_cls: 0.000397
+ >>> rpn_loss_box: 0.021766
+ >>> loss_cls: 3.052359
+ >>> loss_box: 0.194747
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 420 / 250000, stage: stage1, total loss: 0.014808
+ >>> rpn_loss_cls: 0.002582
+ >>> rpn_loss_box: 0.012226
+ >>> loss_cls: 3.046731
+ >>> loss_box: 0.176811
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 440 / 250000, stage: stage1, total loss: 0.011568
+ >>> rpn_loss_cls: 0.002229
+ >>> rpn_loss_box: 0.009339
+ >>> loss_cls: 3.046521
+ >>> loss_box: 0.164488
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 460 / 250000, stage: stage1, total loss: 0.003938
+ >>> rpn_loss_cls: 0.002064
+ >>> rpn_loss_box: 0.001874
+ >>> loss_cls: 3.045477
+ >>> loss_box: 0.115091
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 480 / 250000, stage: stage1, total loss: 0.007664
+ >>> rpn_loss_cls: 0.000882
+ >>> rpn_loss_box: 0.006782
+ >>> loss_cls: 3.047820
+ >>> loss_box: 0.085422
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 500 / 250000, stage: stage1, total loss: 0.035026
+ >>> rpn_loss_cls: 0.001255
+ >>> rpn_loss_box: 0.033772
+ >>> loss_cls: 3.045752
+ >>> loss_box: 0.215051
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 520 / 250000, stage: stage1, total loss: 0.003980
+ >>> rpn_loss_cls: 0.001560
+ >>> rpn_loss_box: 0.002419
+ >>> loss_cls: 3.042170
+ >>> loss_box: 0.166756
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 540 / 250000, stage: stage1, total loss: 0.001933
+ >>> rpn_loss_cls: 0.000840
+ >>> rpn_loss_box: 0.001092
+ >>> loss_cls: 3.042044
+ >>> loss_box: 0.178644
+ >>> lr: 0.001000
+speed: 0.143s / iter
+iter: 560 / 250000, stage: stage1, total loss: 0.005912
+ >>> rpn_loss_cls: 0.000897
+ >>> rpn_loss_box: 0.005015
+ >>> loss_cls: 3.044377
+ >>> loss_box: 0.136760
+ >>> lr: 0.001000
+speed: 0.142s / iter
+iter: 580 / 250000, stage: stage1, total loss: 0.001470
+ >>> rpn_loss_cls: 0.000740
+ >>> rpn_loss_box: 0.000730
+ >>> loss_cls: 3.041743
+ >>> loss_box: 0.136423
+ >>> lr: 0.001000
+speed: 0.142s / iter
+iter: 600 / 250000, stage: stage1, total loss: 0.012971
+ >>> rpn_loss_cls: 0.000600
+ >>> rpn_loss_box: 0.012371
+ >>> loss_cls: 3.050961
+ >>> loss_box: 0.160248
+ >>> lr: 0.001000
+speed: 0.141s / iter
+iter: 620 / 250000, stage: stage1, total loss: 0.005923
+ >>> rpn_loss_cls: 0.000547
+ >>> rpn_loss_box: 0.005376
+ >>> loss_cls: 3.051520
+ >>> loss_box: 0.246478
+ >>> lr: 0.001000
+speed: 0.141s / iter
+iter: 640 / 250000, stage: stage1, total loss: 0.002074
+ >>> rpn_loss_cls: 0.001011
+ >>> rpn_loss_box: 0.001063
+ >>> loss_cls: 3.044681
+ >>> loss_box: 0.104211
+ >>> lr: 0.001000
+speed: 0.141s / iter
+iter: 660 / 250000, stage: stage1, total loss: 0.001647
+ >>> rpn_loss_cls: 0.000736
+ >>> rpn_loss_box: 0.000911
+ >>> loss_cls: 3.041953
+ >>> loss_box: 0.158329
+ >>> lr: 0.001000
+speed: 0.141s / iter
+iter: 680 / 250000, stage: stage1, total loss: 0.001949
+ >>> rpn_loss_cls: 0.000541
+ >>> rpn_loss_box: 0.001408
+ >>> loss_cls: 3.041774
+ >>> loss_box: 0.154107
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 700 / 250000, stage: stage1, total loss: 0.007896
+ >>> rpn_loss_cls: 0.000534
+ >>> rpn_loss_box: 0.007362
+ >>> loss_cls: 3.044686
+ >>> loss_box: 0.167376
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 720 / 250000, stage: stage1, total loss: 0.004766
+ >>> rpn_loss_cls: 0.001029
+ >>> rpn_loss_box: 0.003737
+ >>> loss_cls: 3.046281
+ >>> loss_box: 0.179086
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 740 / 250000, stage: stage1, total loss: 0.009105
+ >>> rpn_loss_cls: 0.000686
+ >>> rpn_loss_box: 0.008418
+ >>> loss_cls: 3.048637
+ >>> loss_box: 0.162085
+ >>> lr: 0.001000
+speed: 0.140s / iter
+iter: 760 / 250000, stage: stage1, total loss: 0.003248
+ >>> rpn_loss_cls: 0.001812
+ >>> rpn_loss_box: 0.001436
+ >>> loss_cls: 3.044980
+ >>> loss_box: 0.161000
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 780 / 250000, stage: stage1, total loss: 0.004389
+ >>> rpn_loss_cls: 0.000694
+ >>> rpn_loss_box: 0.003695
+ >>> loss_cls: 3.037703
+ >>> loss_box: 0.193098
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 800 / 250000, stage: stage1, total loss: 0.004067
+ >>> rpn_loss_cls: 0.000949
+ >>> rpn_loss_box: 0.003118
+ >>> loss_cls: 3.038793
+ >>> loss_box: 0.154744
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 820 / 250000, stage: stage1, total loss: 0.009129
+ >>> rpn_loss_cls: 0.001980
+ >>> rpn_loss_box: 0.007149
+ >>> loss_cls: 3.047403
+ >>> loss_box: 0.140701
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 840 / 250000, stage: stage1, total loss: 0.002987
+ >>> rpn_loss_cls: 0.001836
+ >>> rpn_loss_box: 0.001151
+ >>> loss_cls: 3.045721
+ >>> loss_box: 0.105859
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 860 / 250000, stage: stage1, total loss: 0.008085
+ >>> rpn_loss_cls: 0.001103
+ >>> rpn_loss_box: 0.006982
+ >>> loss_cls: 3.044016
+ >>> loss_box: 0.162391
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 880 / 250000, stage: stage1, total loss: 0.008128
+ >>> rpn_loss_cls: 0.001185
+ >>> rpn_loss_box: 0.006943
+ >>> loss_cls: 3.043934
+ >>> loss_box: 0.146804
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 900 / 250000, stage: stage1, total loss: 0.003836
+ >>> rpn_loss_cls: 0.002242
+ >>> rpn_loss_box: 0.001594
+ >>> loss_cls: 3.046703
+ >>> loss_box: 0.113606
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 920 / 250000, stage: stage1, total loss: 0.002362
+ >>> rpn_loss_cls: 0.000541
+ >>> rpn_loss_box: 0.001820
+ >>> loss_cls: 3.051712
+ >>> loss_box: 0.166212
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 940 / 250000, stage: stage1, total loss: 0.001177
+ >>> rpn_loss_cls: 0.000201
+ >>> rpn_loss_box: 0.000976
+ >>> loss_cls: 3.040001
+ >>> loss_box: 0.112245
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 960 / 250000, stage: stage1, total loss: 0.003350
+ >>> rpn_loss_cls: 0.000442
+ >>> rpn_loss_box: 0.002907
+ >>> loss_cls: 3.045488
+ >>> loss_box: 0.164142
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 980 / 250000, stage: stage1, total loss: 0.018249
+ >>> rpn_loss_cls: 0.001594
+ >>> rpn_loss_box: 0.016655
+ >>> loss_cls: 3.050771
+ >>> loss_box: 0.094204
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1000 / 250000, stage: stage1, total loss: 0.001195
+ >>> rpn_loss_cls: 0.000675
+ >>> rpn_loss_box: 0.000520
+ >>> loss_cls: 3.042839
+ >>> loss_box: 0.116121
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1020 / 250000, stage: stage1, total loss: 0.001605
+ >>> rpn_loss_cls: 0.000449
+ >>> rpn_loss_box: 0.001156
+ >>> loss_cls: 3.044159
+ >>> loss_box: 0.122055
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1040 / 250000, stage: stage1, total loss: 0.001429
+ >>> rpn_loss_cls: 0.000478
+ >>> rpn_loss_box: 0.000951
+ >>> loss_cls: 3.044167
+ >>> loss_box: 0.128182
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1060 / 250000, stage: stage1, total loss: 0.001677
+ >>> rpn_loss_cls: 0.000414
+ >>> rpn_loss_box: 0.001263
+ >>> loss_cls: 3.042490
+ >>> loss_box: 0.204892
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 1080 / 250000, stage: stage1, total loss: 0.002997
+ >>> rpn_loss_cls: 0.001050
+ >>> rpn_loss_box: 0.001947
+ >>> loss_cls: 3.051360
+ >>> loss_box: 0.136164
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 1100 / 250000, stage: stage1, total loss: 0.001292
+ >>> rpn_loss_cls: 0.000659
+ >>> rpn_loss_box: 0.000633
+ >>> loss_cls: 3.045292
+ >>> loss_box: 0.129014
+ >>> lr: 0.001000
+speed: 0.139s / iter
+iter: 1120 / 250000, stage: stage1, total loss: 0.006516
+ >>> rpn_loss_cls: 0.001783
+ >>> rpn_loss_box: 0.004733
+ >>> loss_cls: 3.046726
+ >>> loss_box: 0.171504
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1140 / 250000, stage: stage1, total loss: 0.002840
+ >>> rpn_loss_cls: 0.001162
+ >>> rpn_loss_box: 0.001678
+ >>> loss_cls: 3.038366
+ >>> loss_box: 0.144951
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1160 / 250000, stage: stage1, total loss: 0.003179
+ >>> rpn_loss_cls: 0.000735
+ >>> rpn_loss_box: 0.002444
+ >>> loss_cls: 3.034235
+ >>> loss_box: 0.111471
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1180 / 250000, stage: stage1, total loss: 0.001428
+ >>> rpn_loss_cls: 0.000310
+ >>> rpn_loss_box: 0.001118
+ >>> loss_cls: 3.039714
+ >>> loss_box: 0.135802
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1200 / 250000, stage: stage1, total loss: 0.003602
+ >>> rpn_loss_cls: 0.000513
+ >>> rpn_loss_box: 0.003089
+ >>> loss_cls: 3.045094
+ >>> loss_box: 0.142672
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1220 / 250000, stage: stage1, total loss: 0.001818
+ >>> rpn_loss_cls: 0.000542
+ >>> rpn_loss_box: 0.001276
+ >>> loss_cls: 3.035690
+ >>> loss_box: 0.157364
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1240 / 250000, stage: stage1, total loss: 0.004280
+ >>> rpn_loss_cls: 0.000301
+ >>> rpn_loss_box: 0.003979
+ >>> loss_cls: 3.036283
+ >>> loss_box: 0.120552
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1260 / 250000, stage: stage1, total loss: 0.001757
+ >>> rpn_loss_cls: 0.000320
+ >>> rpn_loss_box: 0.001437
+ >>> loss_cls: 3.040861
+ >>> loss_box: 0.144177
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1280 / 250000, stage: stage1, total loss: 0.003644
+ >>> rpn_loss_cls: 0.000533
+ >>> rpn_loss_box: 0.003111
+ >>> loss_cls: 3.046103
+ >>> loss_box: 0.161786
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1300 / 250000, stage: stage1, total loss: 0.001805
+ >>> rpn_loss_cls: 0.000767
+ >>> rpn_loss_box: 0.001038
+ >>> loss_cls: 3.051531
+ >>> loss_box: 0.100208
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1320 / 250000, stage: stage1, total loss: 0.002613
+ >>> rpn_loss_cls: 0.000868
+ >>> rpn_loss_box: 0.001745
+ >>> loss_cls: 3.038168
+ >>> loss_box: 0.127676
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1340 / 250000, stage: stage1, total loss: 0.001263
+ >>> rpn_loss_cls: 0.000485
+ >>> rpn_loss_box: 0.000778
+ >>> loss_cls: 3.049860
+ >>> loss_box: 0.126983
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1360 / 250000, stage: stage1, total loss: 0.002814
+ >>> rpn_loss_cls: 0.000551
+ >>> rpn_loss_box: 0.002263
+ >>> loss_cls: 3.049514
+ >>> loss_box: 0.157050
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1380 / 250000, stage: stage1, total loss: 0.001824
+ >>> rpn_loss_cls: 0.000476
+ >>> rpn_loss_box: 0.001348
+ >>> loss_cls: 3.040139
+ >>> loss_box: 0.117498
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1400 / 250000, stage: stage1, total loss: 0.001901
+ >>> rpn_loss_cls: 0.000581
+ >>> rpn_loss_box: 0.001320
+ >>> loss_cls: 3.041605
+ >>> loss_box: 0.152761
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1420 / 250000, stage: stage1, total loss: 0.000981
+ >>> rpn_loss_cls: 0.000448
+ >>> rpn_loss_box: 0.000533
+ >>> loss_cls: 3.040675
+ >>> loss_box: 0.186499
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1440 / 250000, stage: stage1, total loss: 0.000945
+ >>> rpn_loss_cls: 0.000312
+ >>> rpn_loss_box: 0.000633
+ >>> loss_cls: 3.044688
+ >>> loss_box: 0.127149
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1460 / 250000, stage: stage1, total loss: 0.003812
+ >>> rpn_loss_cls: 0.000285
+ >>> rpn_loss_box: 0.003527
+ >>> loss_cls: 3.043698
+ >>> loss_box: 0.163996
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1480 / 250000, stage: stage1, total loss: 0.003718
+ >>> rpn_loss_cls: 0.000418
+ >>> rpn_loss_box: 0.003299
+ >>> loss_cls: 3.037301
+ >>> loss_box: 0.136249
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1500 / 250000, stage: stage1, total loss: 0.002609
+ >>> rpn_loss_cls: 0.000696
+ >>> rpn_loss_box: 0.001913
+ >>> loss_cls: 3.042827
+ >>> loss_box: 0.153286
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1520 / 250000, stage: stage1, total loss: 0.002044
+ >>> rpn_loss_cls: 0.000454
+ >>> rpn_loss_box: 0.001591
+ >>> loss_cls: 3.043072
+ >>> loss_box: 0.125616
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1540 / 250000, stage: stage1, total loss: 0.001156
+ >>> rpn_loss_cls: 0.000730
+ >>> rpn_loss_box: 0.000426
+ >>> loss_cls: 3.039155
+ >>> loss_box: 0.143250
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1560 / 250000, stage: stage1, total loss: 0.004621
+ >>> rpn_loss_cls: 0.001037
+ >>> rpn_loss_box: 0.003584
+ >>> loss_cls: 3.047750
+ >>> loss_box: 0.149778
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1580 / 250000, stage: stage1, total loss: 0.004100
+ >>> rpn_loss_cls: 0.000472
+ >>> rpn_loss_box: 0.003629
+ >>> loss_cls: 3.048320
+ >>> loss_box: 0.112574
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1600 / 250000, stage: stage1, total loss: 0.005994
+ >>> rpn_loss_cls: 0.000367
+ >>> rpn_loss_box: 0.005627
+ >>> loss_cls: 3.044858
+ >>> loss_box: 0.073832
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1620 / 250000, stage: stage1, total loss: 0.004436
+ >>> rpn_loss_cls: 0.000397
+ >>> rpn_loss_box: 0.004039
+ >>> loss_cls: 3.044302
+ >>> loss_box: 0.159568
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1640 / 250000, stage: stage1, total loss: 0.001987
+ >>> rpn_loss_cls: 0.000552
+ >>> rpn_loss_box: 0.001435
+ >>> loss_cls: 3.044212
+ >>> loss_box: 0.134359
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1660 / 250000, stage: stage1, total loss: 0.002710
+ >>> rpn_loss_cls: 0.000635
+ >>> rpn_loss_box: 0.002074
+ >>> loss_cls: 3.055729
+ >>> loss_box: 0.093818
+ >>> lr: 0.001000
+speed: 0.138s / iter
+iter: 1680 / 250000, stage: stage1, total loss: 0.001243
+ >>> rpn_loss_cls: 0.000470
+ >>> rpn_loss_box: 0.000773
+ >>> loss_cls: 3.037584
+ >>> loss_box: 0.089284
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1700 / 250000, stage: stage1, total loss: 0.007958
+ >>> rpn_loss_cls: 0.000507
+ >>> rpn_loss_box: 0.007451
+ >>> loss_cls: 3.041826
+ >>> loss_box: 0.172833
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1720 / 250000, stage: stage1, total loss: 0.003837
+ >>> rpn_loss_cls: 0.001270
+ >>> rpn_loss_box: 0.002567
+ >>> loss_cls: 3.055071
+ >>> loss_box: 0.152625
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1740 / 250000, stage: stage1, total loss: 0.003234
+ >>> rpn_loss_cls: 0.000667
+ >>> rpn_loss_box: 0.002568
+ >>> loss_cls: 3.048933
+ >>> loss_box: 0.187405
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1760 / 250000, stage: stage1, total loss: 0.001811
+ >>> rpn_loss_cls: 0.000330
+ >>> rpn_loss_box: 0.001481
+ >>> loss_cls: 3.045675
+ >>> loss_box: 0.155014
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1780 / 250000, stage: stage1, total loss: 0.001566
+ >>> rpn_loss_cls: 0.000354
+ >>> rpn_loss_box: 0.001212
+ >>> loss_cls: 3.043070
+ >>> loss_box: 0.101903
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1800 / 250000, stage: stage1, total loss: 0.000845
+ >>> rpn_loss_cls: 0.000246
+ >>> rpn_loss_box: 0.000599
+ >>> loss_cls: 3.041643
+ >>> loss_box: 0.102683
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1820 / 250000, stage: stage1, total loss: 0.003114
+ >>> rpn_loss_cls: 0.000299
+ >>> rpn_loss_box: 0.002815
+ >>> loss_cls: 3.043649
+ >>> loss_box: 0.144541
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1840 / 250000, stage: stage1, total loss: 0.001129
+ >>> rpn_loss_cls: 0.000359
+ >>> rpn_loss_box: 0.000771
+ >>> loss_cls: 3.043320
+ >>> loss_box: 0.135277
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1860 / 250000, stage: stage1, total loss: 0.000844
+ >>> rpn_loss_cls: 0.000475
+ >>> rpn_loss_box: 0.000368
+ >>> loss_cls: 3.044298
+ >>> loss_box: 0.166307
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1880 / 250000, stage: stage1, total loss: 0.003467
+ >>> rpn_loss_cls: 0.000516
+ >>> rpn_loss_box: 0.002952
+ >>> loss_cls: 3.046076
+ >>> loss_box: 0.143344
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1900 / 250000, stage: stage1, total loss: 0.012957
+ >>> rpn_loss_cls: 0.000743
+ >>> rpn_loss_box: 0.012213
+ >>> loss_cls: 3.048339
+ >>> loss_box: 0.217688
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1920 / 250000, stage: stage1, total loss: 0.003741
+ >>> rpn_loss_cls: 0.001014
+ >>> rpn_loss_box: 0.002727
+ >>> loss_cls: 3.043200
+ >>> loss_box: 0.135739
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1940 / 250000, stage: stage1, total loss: 0.001303
+ >>> rpn_loss_cls: 0.000423
+ >>> rpn_loss_box: 0.000879
+ >>> loss_cls: 3.044845
+ >>> loss_box: 0.132994
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1960 / 250000, stage: stage1, total loss: 0.001051
+ >>> rpn_loss_cls: 0.000533
+ >>> rpn_loss_box: 0.000518
+ >>> loss_cls: 3.042703
+ >>> loss_box: 0.194471
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 1980 / 250000, stage: stage1, total loss: 0.001049
+ >>> rpn_loss_cls: 0.000289
+ >>> rpn_loss_box: 0.000760
+ >>> loss_cls: 3.037144
+ >>> loss_box: 0.111264
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2000 / 250000, stage: stage1, total loss: 0.001783
+ >>> rpn_loss_cls: 0.000408
+ >>> rpn_loss_box: 0.001375
+ >>> loss_cls: 3.047050
+ >>> loss_box: 0.097576
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2020 / 250000, stage: stage1, total loss: 0.006293
+ >>> rpn_loss_cls: 0.000196
+ >>> rpn_loss_box: 0.006097
+ >>> loss_cls: 3.048833
+ >>> loss_box: 0.086466
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2040 / 250000, stage: stage1, total loss: 0.000845
+ >>> rpn_loss_cls: 0.000457
+ >>> rpn_loss_box: 0.000389
+ >>> loss_cls: 3.044074
+ >>> loss_box: 0.172405
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2060 / 250000, stage: stage1, total loss: 0.002714
+ >>> rpn_loss_cls: 0.000277
+ >>> rpn_loss_box: 0.002437
+ >>> loss_cls: 3.039278
+ >>> loss_box: 0.130669
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2080 / 250000, stage: stage1, total loss: 0.002707
+ >>> rpn_loss_cls: 0.000537
+ >>> rpn_loss_box: 0.002170
+ >>> loss_cls: 3.044814
+ >>> loss_box: 0.115589
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2100 / 250000, stage: stage1, total loss: 0.003385
+ >>> rpn_loss_cls: 0.000391
+ >>> rpn_loss_box: 0.002994
+ >>> loss_cls: 3.046659
+ >>> loss_box: 0.141311
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2120 / 250000, stage: stage1, total loss: 0.005502
+ >>> rpn_loss_cls: 0.000311
+ >>> rpn_loss_box: 0.005191
+ >>> loss_cls: 3.047145
+ >>> loss_box: 0.136851
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2140 / 250000, stage: stage1, total loss: 0.002444
+ >>> rpn_loss_cls: 0.000380
+ >>> rpn_loss_box: 0.002064
+ >>> loss_cls: 3.034086
+ >>> loss_box: 0.127427
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2160 / 250000, stage: stage1, total loss: 0.000814
+ >>> rpn_loss_cls: 0.000304
+ >>> rpn_loss_box: 0.000510
+ >>> loss_cls: 3.038364
+ >>> loss_box: 0.087844
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2180 / 250000, stage: stage1, total loss: 0.001489
+ >>> rpn_loss_cls: 0.000284
+ >>> rpn_loss_box: 0.001205
+ >>> loss_cls: 3.043202
+ >>> loss_box: 0.106904
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2200 / 250000, stage: stage1, total loss: 0.001551
+ >>> rpn_loss_cls: 0.000300
+ >>> rpn_loss_box: 0.001251
+ >>> loss_cls: 3.047956
+ >>> loss_box: 0.115240
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2220 / 250000, stage: stage1, total loss: 0.001951
+ >>> rpn_loss_cls: 0.000153
+ >>> rpn_loss_box: 0.001798
+ >>> loss_cls: 3.040946
+ >>> loss_box: 0.152482
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2240 / 250000, stage: stage1, total loss: 0.000663
+ >>> rpn_loss_cls: 0.000286
+ >>> rpn_loss_box: 0.000377
+ >>> loss_cls: 3.041199
+ >>> loss_box: 0.136831
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2260 / 250000, stage: stage1, total loss: 0.000594
+ >>> rpn_loss_cls: 0.000211
+ >>> rpn_loss_box: 0.000383
+ >>> loss_cls: 3.041577
+ >>> loss_box: 0.149861
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2280 / 250000, stage: stage1, total loss: 0.000751
+ >>> rpn_loss_cls: 0.000201
+ >>> rpn_loss_box: 0.000550
+ >>> loss_cls: 3.043919
+ >>> loss_box: 0.124327
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2300 / 250000, stage: stage1, total loss: 0.007996
+ >>> rpn_loss_cls: 0.000189
+ >>> rpn_loss_box: 0.007808
+ >>> loss_cls: 3.046034
+ >>> loss_box: 0.198624
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2320 / 250000, stage: stage1, total loss: 0.000956
+ >>> rpn_loss_cls: 0.000177
+ >>> rpn_loss_box: 0.000779
+ >>> loss_cls: 3.041571
+ >>> loss_box: 0.150095
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2340 / 250000, stage: stage1, total loss: 0.005353
+ >>> rpn_loss_cls: 0.000609
+ >>> rpn_loss_box: 0.004744
+ >>> loss_cls: 3.046129
+ >>> loss_box: 0.148456
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2360 / 250000, stage: stage1, total loss: 0.001107
+ >>> rpn_loss_cls: 0.000634
+ >>> rpn_loss_box: 0.000473
+ >>> loss_cls: 3.046462
+ >>> loss_box: 0.150979
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2380 / 250000, stage: stage1, total loss: 0.002821
+ >>> rpn_loss_cls: 0.000922
+ >>> rpn_loss_box: 0.001899
+ >>> loss_cls: 3.040720
+ >>> loss_box: 0.134334
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2400 / 250000, stage: stage1, total loss: 0.017634
+ >>> rpn_loss_cls: 0.001155
+ >>> rpn_loss_box: 0.016479
+ >>> loss_cls: 3.049695
+ >>> loss_box: 0.217697
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2420 / 250000, stage: stage1, total loss: 0.002373
+ >>> rpn_loss_cls: 0.001267
+ >>> rpn_loss_box: 0.001106
+ >>> loss_cls: 3.039836
+ >>> loss_box: 0.146685
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2440 / 250000, stage: stage1, total loss: 0.003364
+ >>> rpn_loss_cls: 0.000741
+ >>> rpn_loss_box: 0.002623
+ >>> loss_cls: 3.046560
+ >>> loss_box: 0.068544
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2460 / 250000, stage: stage1, total loss: 0.004407
+ >>> rpn_loss_cls: 0.000621
+ >>> rpn_loss_box: 0.003786
+ >>> loss_cls: 3.044969
+ >>> loss_box: 0.161452
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2480 / 250000, stage: stage1, total loss: 0.001346
+ >>> rpn_loss_cls: 0.000780
+ >>> rpn_loss_box: 0.000565
+ >>> loss_cls: 3.046520
+ >>> loss_box: 0.159928
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2500 / 250000, stage: stage1, total loss: 0.000949
+ >>> rpn_loss_cls: 0.000534
+ >>> rpn_loss_box: 0.000414
+ >>> loss_cls: 3.046444
+ >>> loss_box: 0.171101
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2520 / 250000, stage: stage1, total loss: 0.002330
+ >>> rpn_loss_cls: 0.000621
+ >>> rpn_loss_box: 0.001709
+ >>> loss_cls: 3.049695
+ >>> loss_box: 0.145132
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2540 / 250000, stage: stage1, total loss: 0.001081
+ >>> rpn_loss_cls: 0.000499
+ >>> rpn_loss_box: 0.000582
+ >>> loss_cls: 3.048624
+ >>> loss_box: 0.136221
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2560 / 250000, stage: stage1, total loss: 0.010827
+ >>> rpn_loss_cls: 0.000077
+ >>> rpn_loss_box: 0.010751
+ >>> loss_cls: 3.057560
+ >>> loss_box: 0.168134
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2580 / 250000, stage: stage1, total loss: 0.002082
+ >>> rpn_loss_cls: 0.000288
+ >>> rpn_loss_box: 0.001794
+ >>> loss_cls: 3.043015
+ >>> loss_box: 0.150928
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2600 / 250000, stage: stage1, total loss: 0.002218
+ >>> rpn_loss_cls: 0.000318
+ >>> rpn_loss_box: 0.001900
+ >>> loss_cls: 3.042909
+ >>> loss_box: 0.116765
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2620 / 250000, stage: stage1, total loss: 0.000660
+ >>> rpn_loss_cls: 0.000188
+ >>> rpn_loss_box: 0.000472
+ >>> loss_cls: 3.045783
+ >>> loss_box: 0.126815
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2640 / 250000, stage: stage1, total loss: 0.001999
+ >>> rpn_loss_cls: 0.000217
+ >>> rpn_loss_box: 0.001782
+ >>> loss_cls: 3.040409
+ >>> loss_box: 0.109761
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2660 / 250000, stage: stage1, total loss: 0.001721
+ >>> rpn_loss_cls: 0.000141
+ >>> rpn_loss_box: 0.001580
+ >>> loss_cls: 3.059184
+ >>> loss_box: 0.113124
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2680 / 250000, stage: stage1, total loss: 0.003265
+ >>> rpn_loss_cls: 0.000358
+ >>> rpn_loss_box: 0.002906
+ >>> loss_cls: 3.047202
+ >>> loss_box: 0.072062
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2700 / 250000, stage: stage1, total loss: 0.000897
+ >>> rpn_loss_cls: 0.000404
+ >>> rpn_loss_box: 0.000493
+ >>> loss_cls: 3.046819
+ >>> loss_box: 0.154010
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2720 / 250000, stage: stage1, total loss: 0.002137
+ >>> rpn_loss_cls: 0.000343
+ >>> rpn_loss_box: 0.001794
+ >>> loss_cls: 3.043774
+ >>> loss_box: 0.150082
+ >>> lr: 0.001000
+speed: 0.137s / iter
+iter: 2740 / 250000, stage: stage1, total loss: 0.002207
+ >>> rpn_loss_cls: 0.000541
+ >>> rpn_loss_box: 0.001666
+ >>> loss_cls: 3.058716
+ >>> loss_box: 0.139898
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2760 / 250000, stage: stage1, total loss: 0.005257
+ >>> rpn_loss_cls: 0.000180
+ >>> rpn_loss_box: 0.005077
+ >>> loss_cls: 3.047818
+ >>> loss_box: 0.093412
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2780 / 250000, stage: stage1, total loss: 0.001174
+ >>> rpn_loss_cls: 0.000376
+ >>> rpn_loss_box: 0.000798
+ >>> loss_cls: 3.044520
+ >>> loss_box: 0.144845
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2800 / 250000, stage: stage1, total loss: 0.000780
+ >>> rpn_loss_cls: 0.000296
+ >>> rpn_loss_box: 0.000484
+ >>> loss_cls: 3.044950
+ >>> loss_box: 0.097490
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2820 / 250000, stage: stage1, total loss: 0.000411
+ >>> rpn_loss_cls: 0.000233
+ >>> rpn_loss_box: 0.000178
+ >>> loss_cls: 3.040916
+ >>> loss_box: 0.145951
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2840 / 250000, stage: stage1, total loss: 0.002633
+ >>> rpn_loss_cls: 0.000086
+ >>> rpn_loss_box: 0.002547
+ >>> loss_cls: 3.049418
+ >>> loss_box: 0.112112
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2860 / 250000, stage: stage1, total loss: 0.001056
+ >>> rpn_loss_cls: 0.000175
+ >>> rpn_loss_box: 0.000881
+ >>> loss_cls: 3.055181
+ >>> loss_box: 0.069724
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2880 / 250000, stage: stage1, total loss: 0.000806
+ >>> rpn_loss_cls: 0.000313
+ >>> rpn_loss_box: 0.000493
+ >>> loss_cls: 3.039860
+ >>> loss_box: 0.149172
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2900 / 250000, stage: stage1, total loss: 0.000796
+ >>> rpn_loss_cls: 0.000196
+ >>> rpn_loss_box: 0.000600
+ >>> loss_cls: 3.050311
+ >>> loss_box: 0.133658
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2920 / 250000, stage: stage1, total loss: 0.000563
+ >>> rpn_loss_cls: 0.000273
+ >>> rpn_loss_box: 0.000289
+ >>> loss_cls: 3.046305
+ >>> loss_box: 0.143349
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2940 / 250000, stage: stage1, total loss: 0.007246
+ >>> rpn_loss_cls: 0.000300
+ >>> rpn_loss_box: 0.006947
+ >>> loss_cls: 3.058913
+ >>> loss_box: 0.133056
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2960 / 250000, stage: stage1, total loss: 0.001011
+ >>> rpn_loss_cls: 0.000502
+ >>> rpn_loss_box: 0.000509
+ >>> loss_cls: 3.044243
+ >>> loss_box: 0.110432
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 2980 / 250000, stage: stage1, total loss: 0.001448
+ >>> rpn_loss_cls: 0.000477
+ >>> rpn_loss_box: 0.000971
+ >>> loss_cls: 3.042940
+ >>> loss_box: 0.121403
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 3000 / 250000, stage: stage1, total loss: 0.005699
+ >>> rpn_loss_cls: 0.000701
+ >>> rpn_loss_box: 0.004998
+ >>> loss_cls: 3.048065
+ >>> loss_box: 0.137641
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 3020 / 250000, stage: stage1, total loss: 0.001165
+ >>> rpn_loss_cls: 0.000385
+ >>> rpn_loss_box: 0.000781
+ >>> loss_cls: 3.050936
+ >>> loss_box: 0.118346
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 3040 / 250000, stage: stage1, total loss: 0.001918
+ >>> rpn_loss_cls: 0.000661
+ >>> rpn_loss_box: 0.001257
+ >>> loss_cls: 3.043555
+ >>> loss_box: 0.159090
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 3060 / 250000, stage: stage1, total loss: 0.001141
+ >>> rpn_loss_cls: 0.000480
+ >>> rpn_loss_box: 0.000661
+ >>> loss_cls: 3.042819
+ >>> loss_box: 0.128019
+ >>> lr: 0.001000
+speed: 0.136s / iter
+iter: 3080 / 250000, stage: stage1, total loss: 0.007939
+ >>> rpn_loss_cls: 0.000288
+ >>> rpn_loss_box: 0.007651
+ >>> loss_cls: 3.046866
+ >>> loss_box: 0.098969
+ >>> lr: 0.001000
+speed: 0.136s / iter

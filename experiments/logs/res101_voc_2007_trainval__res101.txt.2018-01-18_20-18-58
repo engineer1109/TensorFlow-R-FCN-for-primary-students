@@ -1,0 +1,346 @@
++ echo Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2018-01-18_20-18-58
+Logging output to experiments/logs/res101_voc_2007_trainval__res101.txt.2018-01-18_20-18-58
++ set +x
++ '[' '!' -f output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_50000.ckpt.index ']'
++ ./experiments/scripts/test_faster_rcnn.sh 0 pascal_voc res101
++ set -e
++ export PYTHONUNBUFFERED=True
++ PYTHONUNBUFFERED=True
++ GPU_ID=0
++ DATASET=pascal_voc
++ NET=res101
++ array=($@)
++ len=3
++ EXTRA_ARGS=
++ EXTRA_ARGS_SLUG=
++ case ${DATASET} in
++ TRAIN_IMDB=voc_2007_trainval
++ TEST_IMDB=voc_2007_test
++ ITERS=50000
++ ANCHORS='[8,16,32]'
++ RATIOS='[0.5,1,2]'
+++ date +%Y-%m-%d_%H-%M-%S
++ LOG=experiments/logs/test_res101_voc_2007_trainval_.txt.2018-01-18_20-18-58
++ exec
+++ tee -a experiments/logs/test_res101_voc_2007_trainval_.txt.2018-01-18_20-18-58
++ echo Logging output to experiments/logs/test_res101_voc_2007_trainval_.txt.2018-01-18_20-18-58
+Logging output to experiments/logs/test_res101_voc_2007_trainval_.txt.2018-01-18_20-18-58
++ set +x
++ [[ ! -z '' ]]
++ CUDA_VISIBLE_DEVICES=0
++ time python ./tools/test_net.py --imdb voc_2007_test --model output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_50000.ckpt --cfg experiments/cfgs/res101_rfcn.yml --net res101 --set ANCHOR_SCALES '[8,16,32]' ANCHOR_RATIOS '[0.5,1,2]'
+Called with args:
+Namespace(cfg_file='experiments/cfgs/res101_rfcn.yml', comp_mode=False, imdb_name='voc_2007_test', max_per_image=100, model='output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_50000.ckpt', net='res101', set_cfgs=['ANCHOR_SCALES', '[8,16,32]', 'ANCHOR_RATIOS', '[0.5,1,2]'], tag='')
+Using config:
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32],
+ 'CLASSES': 5,
+ 'DATA_DIR': '/home/wjl/tf_rfcnm/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'res101',
+ 'FOCAL_LOSS': False,
+ 'GPU_ID': 0,
+ 'K': 3,
+ 'MATLAB': 'matlab',
+ 'PIXEL_MEANS': array([[[ 102.9801,  115.9465,  122.7717]]]),
+ 'POOLING_MODE': 'crop',
+ 'POOLING_SIZE': 7,
+ 'RESNET': {'BN_TRAIN': False, 'FIXED_BLOCKS': 1, 'MAX_POOL': False},
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/wjl/tf_rfcnm',
+ 'TEST': {'BBOX_REG': True,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'MODE': 'nms',
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'gt',
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'RPN_TOP_N': 5000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': False,
+           'BATCH_SIZE': 100,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'BIAS_DECAY': False,
+           'DISPLAY': 20,
+           'DOUBLE_BIAS': False,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'OHEM': False,
+           'OHEM_B': 128,
+           'OHEM_NMS_THRESH': 0.7,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_ITERS': 5000,
+           'SNAPSHOT_KEPT': 3,
+           'SNAPSHOT_PREFIX': 'res101_faster_rcnn',
+           'STEPSIZE': 80000,
+           'SUMMARY_INTERVAL': 60,
+           'TRUNCATED': False,
+           'USE_ALL_GT': True,
+           'USE_FLIPPED': True,
+           'USE_GT': False,
+           'WEIGHT_DECAY': 0.0001},
+ 'USE_GPU_NMS': True}
+2018-01-18 20:18:59.557202: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-01-18 20:18:59.781220: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.62
+pciBusID: 0000:03:00.0
+totalMemory: 10.91GiB freeMemory: 8.87GiB
+2018-01-18 20:18:59.781280: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:03:00.0, compute capability: 6.1)
+[<tf.Variable 'resnet_v1_101/refined_reduce_depth/weights:0' shape=(1, 1, 2048, 1024) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_reduce_depth/biases:0' shape=(1024,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_classes/weights:0' shape=(1, 1, 1024, 45) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_classes/biases:0' shape=(45,) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_bbox/weights:0' shape=(1, 1, 1024, 180) dtype=float32_ref>,
+ <tf.Variable 'resnet_v1_101/refined_bbox/biases:0' shape=(180,) dtype=float32_ref>]
+Loading model check point from output/res101/voc_2007_trainval/default/res101_faster_rcnn_iter_50000.ckpt
+Loaded.
+im_detect: 1/200 1.496s 0.001s
+im_detect: 2/200 0.838s 0.000s
+im_detect: 3/200 0.618s 0.000s
+im_detect: 4/200 0.505s 0.000s
+im_detect: 5/200 0.439s 0.000s
+im_detect: 6/200 0.394s 0.000s
+im_detect: 7/200 0.363s 0.000s
+im_detect: 8/200 0.339s 0.000s
+im_detect: 9/200 0.321s 0.000s
+im_detect: 10/200 0.307s 0.000s
+im_detect: 11/200 0.296s 0.000s
+im_detect: 12/200 0.286s 0.000s
+im_detect: 13/200 0.277s 0.000s
+im_detect: 14/200 0.270s 0.000s
+im_detect: 15/200 0.264s 0.000s
+im_detect: 16/200 0.258s 0.000s
+im_detect: 17/200 0.254s 0.000s
+im_detect: 18/200 0.249s 0.000s
+im_detect: 19/200 0.246s 0.000s
+im_detect: 20/200 0.243s 0.000s
+im_detect: 21/200 0.239s 0.000s
+im_detect: 22/200 0.237s 0.000s
+im_detect: 23/200 0.234s 0.000s
+im_detect: 24/200 0.231s 0.000s
+im_detect: 25/200 0.229s 0.000s
+im_detect: 26/200 0.227s 0.000s
+im_detect: 27/200 0.226s 0.000s
+im_detect: 28/200 0.224s 0.000s
+im_detect: 29/200 0.222s 0.000s
+im_detect: 30/200 0.221s 0.000s
+im_detect: 31/200 0.219s 0.000s
+im_detect: 32/200 0.218s 0.000s
+im_detect: 33/200 0.217s 0.000s
+im_detect: 34/200 0.215s 0.000s
+im_detect: 35/200 0.214s 0.000s
+im_detect: 36/200 0.213s 0.000s
+im_detect: 37/200 0.212s 0.000s
+im_detect: 38/200 0.211s 0.000s
+im_detect: 39/200 0.210s 0.000s
+im_detect: 40/200 0.210s 0.000s
+im_detect: 41/200 0.209s 0.000s
+im_detect: 42/200 0.208s 0.000s
+im_detect: 43/200 0.207s 0.000s
+im_detect: 44/200 0.207s 0.000s
+im_detect: 45/200 0.206s 0.000s
+im_detect: 46/200 0.205s 0.000s
+im_detect: 47/200 0.204s 0.000s
+im_detect: 48/200 0.204s 0.000s
+im_detect: 49/200 0.204s 0.000s
+im_detect: 50/200 0.203s 0.000s
+im_detect: 51/200 0.202s 0.000s
+im_detect: 52/200 0.202s 0.000s
+im_detect: 53/200 0.202s 0.000s
+im_detect: 54/200 0.201s 0.000s
+im_detect: 55/200 0.201s 0.000s
+im_detect: 56/200 0.200s 0.000s
+im_detect: 57/200 0.200s 0.000s
+im_detect: 58/200 0.200s 0.000s
+im_detect: 59/200 0.199s 0.000s
+im_detect: 60/200 0.199s 0.000s
+im_detect: 61/200 0.198s 0.000s
+im_detect: 62/200 0.198s 0.000s
+im_detect: 63/200 0.198s 0.000s
+im_detect: 64/200 0.197s 0.000s
+im_detect: 65/200 0.197s 0.000s
+im_detect: 66/200 0.197s 0.000s
+im_detect: 67/200 0.196s 0.000s
+im_detect: 68/200 0.196s 0.000s
+im_detect: 69/200 0.196s 0.000s
+im_detect: 70/200 0.195s 0.000s
+im_detect: 71/200 0.195s 0.000s
+im_detect: 72/200 0.195s 0.000s
+im_detect: 73/200 0.195s 0.000s
+im_detect: 74/200 0.195s 0.000s
+im_detect: 75/200 0.194s 0.000s
+im_detect: 76/200 0.194s 0.000s
+im_detect: 77/200 0.194s 0.000s
+im_detect: 78/200 0.194s 0.000s
+im_detect: 79/200 0.193s 0.000s
+im_detect: 80/200 0.193s 0.000s
+im_detect: 81/200 0.193s 0.000s
+im_detect: 82/200 0.193s 0.000s
+im_detect: 83/200 0.193s 0.000s
+im_detect: 84/200 0.193s 0.000s
+im_detect: 85/200 0.192s 0.000s
+im_detect: 86/200 0.192s 0.000s
+im_detect: 87/200 0.192s 0.000s
+im_detect: 88/200 0.192s 0.000s
+im_detect: 89/200 0.192s 0.000s
+im_detect: 90/200 0.192s 0.000s
+im_detect: 91/200 0.192s 0.000s
+im_detect: 92/200 0.191s 0.000s
+im_detect: 93/200 0.191s 0.000s
+im_detect: 94/200 0.191s 0.000s
+im_detect: 95/200 0.191s 0.000s
+im_detect: 96/200 0.191s 0.000s
+im_detect: 97/200 0.191s 0.000s
+im_detect: 98/200 0.191s 0.000s
+im_detect: 99/200 0.190s 0.000s
+im_detect: 100/200 0.190s 0.000s
+im_detect: 101/200 0.190s 0.000s
+im_detect: 102/200 0.190s 0.000s
+im_detect: 103/200 0.190s 0.000s
+im_detect: 104/200 0.190s 0.000s
+im_detect: 105/200 0.190s 0.000s
+im_detect: 106/200 0.190s 0.000s
+im_detect: 107/200 0.189s 0.000s
+im_detect: 108/200 0.189s 0.000s
+im_detect: 109/200 0.189s 0.000s
+im_detect: 110/200 0.189s 0.000s
+im_detect: 111/200 0.189s 0.000s
+im_detect: 112/200 0.189s 0.000s
+im_detect: 113/200 0.189s 0.000s
+im_detect: 114/200 0.189s 0.000s
+im_detect: 115/200 0.189s 0.000s
+im_detect: 116/200 0.189s 0.000s
+im_detect: 117/200 0.188s 0.000s
+im_detect: 118/200 0.188s 0.000s
+im_detect: 119/200 0.188s 0.000s
+im_detect: 120/200 0.188s 0.000s
+im_detect: 121/200 0.188s 0.000s
+im_detect: 122/200 0.188s 0.000s
+im_detect: 123/200 0.188s 0.000s
+im_detect: 124/200 0.188s 0.000s
+im_detect: 125/200 0.188s 0.000s
+im_detect: 126/200 0.187s 0.000s
+im_detect: 127/200 0.187s 0.000s
+im_detect: 128/200 0.187s 0.000s
+im_detect: 129/200 0.187s 0.000s
+im_detect: 130/200 0.187s 0.000s
+im_detect: 131/200 0.187s 0.000s
+im_detect: 132/200 0.187s 0.000s
+im_detect: 133/200 0.187s 0.000s
+im_detect: 134/200 0.187s 0.000s
+im_detect: 135/200 0.187s 0.000s
+im_detect: 136/200 0.187s 0.000s
+im_detect: 137/200 0.187s 0.000s
+im_detect: 138/200 0.187s 0.000s
+im_detect: 139/200 0.187s 0.000s
+im_detect: 140/200 0.186s 0.000s
+im_detect: 141/200 0.186s 0.000s
+im_detect: 142/200 0.186s 0.000s
+im_detect: 143/200 0.186s 0.000s
+im_detect: 144/200 0.186s 0.000s
+im_detect: 145/200 0.186s 0.000s
+im_detect: 146/200 0.186s 0.000s
+im_detect: 147/200 0.186s 0.000s
+im_detect: 148/200 0.186s 0.000s
+im_detect: 149/200 0.186s 0.000s
+im_detect: 150/200 0.186s 0.000s
+im_detect: 151/200 0.186s 0.000s
+im_detect: 152/200 0.186s 0.000s
+im_detect: 153/200 0.186s 0.000s
+im_detect: 154/200 0.186s 0.000s
+im_detect: 155/200 0.186s 0.000s
+im_detect: 156/200 0.186s 0.000s
+im_detect: 157/200 0.186s 0.000s
+im_detect: 158/200 0.185s 0.000s
+im_detect: 159/200 0.185s 0.000s
+im_detect: 160/200 0.185s 0.000s
+im_detect: 161/200 0.185s 0.000s
+im_detect: 162/200 0.185s 0.000s
+im_detect: 163/200 0.185s 0.000s
+im_detect: 164/200 0.185s 0.000s
+im_detect: 165/200 0.185s 0.000s
+im_detect: 166/200 0.185s 0.000s
+im_detect: 167/200 0.185s 0.000s
+im_detect: 168/200 0.185s 0.000s
+im_detect: 169/200 0.185s 0.000s
+im_detect: 170/200 0.185s 0.000s
+im_detect: 171/200 0.185s 0.000s
+im_detect: 172/200 0.185s 0.000s
+im_detect: 173/200 0.185s 0.000s
+im_detect: 174/200 0.185s 0.000s
+im_detect: 175/200 0.185s 0.000s
+im_detect: 176/200 0.185s 0.000s
+im_detect: 177/200 0.185s 0.000s
+im_detect: 178/200 0.185s 0.000s
+im_detect: 179/200 0.185s 0.000s
+im_detect: 180/200 0.185s 0.000s
+im_detect: 181/200 0.185s 0.000s
+im_detect: 182/200 0.185s 0.000s
+im_detect: 183/200 0.184s 0.000s
+im_detect: 184/200 0.184s 0.000s
+im_detect: 185/200 0.184s 0.000s
+im_detect: 186/200 0.184s 0.000s
+im_detect: 187/200 0.184s 0.000s
+im_detect: 188/200 0.184s 0.000s
+im_detect: 189/200 0.184s 0.000s
+im_detect: 190/200 0.184s 0.000s
+im_detect: 191/200 0.184s 0.000s
+im_detect: 192/200 0.184s 0.000s
+im_detect: 193/200 0.184s 0.000s
+im_detect: 194/200 0.184s 0.000s
+im_detect: 195/200 0.184s 0.000s
+im_detect: 196/200 0.184s 0.000s
+im_detect: 197/200 0.184s 0.000s
+im_detect: 198/200 0.184s 0.000s
+im_detect: 199/200 0.184s 0.000s
+im_detect: 200/200 0.184s 0.000s
+Evaluating detections
+Writing dr0 VOC results file
+Writing dr1 VOC results file
+Writing dr2 VOC results file
+Writing dr3 VOC results file
+VOC07 metric? Yes
+Traceback (most recent call last):
+  File "./tools/test_net.py", line 121, in <module>
+    test_net(sess, net, imdb, filename, max_per_image=args.max_per_image)
+  File "/home/wjl/tf_rfcnm/tools/../lib/model/test.py", line 206, in test_net
+    imdb.evaluate_detections(all_boxes, output_dir)
+  File "/home/wjl/tf_rfcnm/tools/../lib/datasets/pascal_voc.py", line 277, in evaluate_detections
+    self._do_python_eval(output_dir)
+  File "/home/wjl/tf_rfcnm/tools/../lib/datasets/pascal_voc.py", line 240, in _do_python_eval
+    use_07_metric=use_07_metric)
+  File "/home/wjl/tf_rfcnm/tools/../lib/datasets/voc_eval.py", line 134, in voc_eval
+    R = [obj for obj in recs[imagename] if obj['name'] == classname]
+KeyError: 'm33'
+Command exited with non-zero status 1
+60.08user 4.81system 1:06.79elapsed 97%CPU (0avgtext+0avgdata 1948516maxresident)k
+0inputs+600outputs (0major+442210minor)pagefaults 0swaps
