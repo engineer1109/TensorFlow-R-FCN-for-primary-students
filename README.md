@@ -63,5 +63,12 @@ Unzip it to ./data/imagenet_weights
   Download | Path 
   ------------- | ------------- 
   Baidu Yun | https://pan.baidu.com/s/1oSZMlwOaIFOuqrMeSIY-PQ  Code: qvos 
+  wget | http://download.tensorflow.org/models/resnet_v1_101_2016_08_28.tar.gz
 
+For wget, you need to change filename to res101.ckpt
+```
+    wget -v http://download.tensorflow.org/models/resnet_v1_101_2016_08_28.tar.gz
+    tar -xzvf resnet_v1_101_2016_08_28.tar.gz
+    mv resnet_v1_101.ckpt res101.ckpt
+```
 ## This is the first complete version. V1.0
