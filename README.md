@@ -44,4 +44,9 @@ Tensorboard viewer
 ```
 ## Dataset of Pascal Voc
 [Pascal Voc 2007+2012](https://github.com/engineer1109/TensorFlow-R-FCN-for-primary-students/tree/master/data/VOCdevkit2007/VOC2007)  
+Decode it to ./data/VOCdevkit2007/VOC2007
+## Models Download
+Baidu Yun https://pan.baidu.com/s/1-zAgNRavUJGX5ggmSH-TEQ  Code: b4vt  
+or Github https://github.com/engineer1109/MyModelDownload
+
 ## I am back now
